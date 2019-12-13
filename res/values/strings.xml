@@ -16,12 +16,12 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Dirty Tweaks -->
-    <string name="dirtytweaks_title">Dirty Tweaks</string>
-    <string name="dirtytweaks_summary">Enhance your experience</string>
+    <!-- Raven's Lair -->
+    <string name="dirtytweaks_title">Raven\'s Lair</string>
+    <string name="dirtytweaks_summary">Unleash the Raven</string>
 
     <!-- The Team -->
-    <string name="dialog_team_title">The Team</string>
+    <string name="dialog_team_title">The Ravens</string>
 
     <!-- Bottom navigation -->
     <string name="bottom_nav_system_title">System</string>
@@ -39,11 +39,11 @@
     <string name="powermenu_title">Power menu</string>
     <string name="powermenu_summary">Configure the power menu</string>
     <string name="notifications_title">Notifications</string>
-    <string name="notifications_summary">Tweaks specific to system notifications</string>
+    <string name="notifications_summary">Tricks specific to system notifications</string>
 
     <!-- Lockscreen -->
     <string name="fingerprint_prefs_title">Fingerprint prefs</string>
-    <string name="fingerprint_prefs_summary">Tweaks specific to the fingerprint scanner</string>
+    <string name="fingerprint_prefs_summary">Tricks specific to the fingerprint scanner</string>
     <string name="lockscreen_items_title">Lockscreen items</string>
     <string name="lockscreen_items_summary">Customize the lockscreen</string>
     <string name="lockscreen_style_title">Lockscreen Style</string>
@@ -64,7 +64,7 @@
     <string name="traffic_title">Traffic indicators</string>
     <string name="traffic_summary">Enable and configure the traffic indicators</string>
     <string name="ticker_title">Ticker</string>
-    <string name="ticker_summary">Enable the statusbar ticker and configure ticker related tweaks</string>
+    <string name="ticker_summary">Enable the statusbar ticker and configure ticker related tricks</string>
 
     <!-- Navigation -->
     <string name="buttons_title">Buttons</string>
@@ -1069,8 +1069,8 @@
     <string name="pocket_judge_summary">Block screen and button inputs when device is in pocket</string>
 
     <!-- OOS clear all button -->
-    <string name="enable_clear_all_button">Replace clear all text with nice button</string>
-    <string name="enable_clear_all_button_summary">Show clear all notifications button in quick settings instead of default text one</string>
+    <string name="enable_clear_all_button">OOS clear all button</string>
+    <string name="enable_clear_all_button_summary">Show clear all notifications OSS button in quick settings instead of default text one</string>
 
     <!-- Display cutout options -->
     <string name="display_cutout_style_title">Cutout style</string>
@@ -1085,5 +1085,9 @@
     <!-- Media Heads up -->
     <string name="show_media_heads_up_title">Show media heads up</string>
     <string name="show_media_heads_up_summary">Show media heads up when a new track is played, if the player is not already in foreground</string>
+    
+    <!-- Smart replies -->
+    <string name="hide_smart_replies_title">Hide smart replies</string>
+    <string name="hide_smart_replies_summary">Hide smart replies to save screen space with peeking notifications</string>
 
 </resources>

@@ -48,6 +48,12 @@
             android:title="@string/vibration_on_charge_state_changed_title"
             android:summary="@string/vibration_on_charge_state_changed_summary"
             android:defaultValue="true" />
+        
+        <com.dirtyunicorns.support.preferences.SystemSettingSwitchPreference
+            android:key="hide_smart_replies"
+            android:title="@string/hide_smart_replies_title"
+            android:summary="@string/hide_smart_replies_summary"
+            android:defaultValue="false"/>
 
     <PreferenceCategory
         android:key="notification_lights"
