@@ -996,6 +996,42 @@
         <item>3</item>
     </string-array>
 
+    <!-- FOD pressed state options -->
+    <string-array name="fod_pressed_state_entries" translatable="false">
+        <item>@string/fod_pressed_state_miui_cyan</item>
+        <item>@string/fod_pressed_state_miui_white</item>
+        <item>@string/fod_pressed_state_vivo_yellow_shadow</item>
+    </string-array>
+
+    <string-array name="fod_pressed_state_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- FOD Recognizing fingerprint animations -->
+    <string-array name="fod_recog_animation_entries" translatable="false">
+        <item>@string/fod_recog_animation_op_mclaren</item>
+        <item>@string/fod_recog_animation_op_ripple</item>
+        <item>@string/fod_recog_animation_op_stripe</item>
+        <item>@string/fod_recog_animation_pureview_future</item>
+        <item>@string/fod_recog_animation_pureview_halo_ring</item>
+        <item>@string/fod_recog_animation_bluefirework</item>
+        <item>@string/fod_recog_animation_coloros7_1</item>
+        <item>@string/fod_recog_animation_coloros7_2</item>
+    </string-array>
+
+    <string-array name="fod_recog_animation_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    
     <!-- Smart pulldown -->
     <string-array name="smart_pulldown_entries" translatable="false">
         <item>@string/smart_pulldown_off</item>
