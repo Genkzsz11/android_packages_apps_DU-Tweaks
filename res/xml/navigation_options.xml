@@ -131,14 +131,15 @@
         <ListPreference
             android:key="left_vertical_swipe_actions"
             android:title="@string/left_vertical_swipe_actions_title"
-            android:entries="@array/active_edge_actions_entries"
-            android:entryValues="@array/active_edge_actions_values"
+            android:entries="@array/gestures_actions_entries"
+            android:entryValues="@array/gestures_actions_values"
             android:defaultValue="0" />
 
         <Preference
             android:key="left_vertical_swipe_app_action"
             android:title="@string/left_vertical_swipe_app_action_title"
-            android:summary="@string/active_edge_app_select_summary">
+            android:summary="@string/app_picker_dialog_title"
+            android:dependency="force_show_navbar">
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.systemui"
                 android:targetClass="com.android.systemui.statusbar.phone.LeftBackVerticalSwipeCustomApp" />
@@ -171,14 +172,15 @@
         <ListPreference
             android:key="right_vertical_swipe_actions"
             android:title="@string/right_vertical_swipe_actions_title"
-            android:entries="@array/active_edge_actions_entries"
-            android:entryValues="@array/active_edge_actions_values"
+            android:entries="@array/gestures_actions_entries"
+            android:entryValues="@array/gestures_actions_values"
             android:defaultValue="0" />
 
         <Preference
             android:key="right_vertical_swipe_app_action"
             android:title="@string/right_vertical_swipe_app_action_title"
-            android:summary="@string/active_edge_app_select_summary">
+            android:summary="@string/app_picker_dialog_title"
+            android:dependency="force_show_navbar">
         <intent android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.systemui"
             android:targetClass="com.android.systemui.statusbar.phone.RightBackVerticalSwipeCustomApp" />
