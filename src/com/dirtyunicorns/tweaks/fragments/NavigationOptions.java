@@ -380,34 +380,6 @@ public class NavigationOptions extends SettingsPreferenceFragment
                 Settings.System.RIGHT_VERTICAL_BACK_SWIPE_ACTION, 0, UserHandle.USER_CURRENT) == 5/*action_app_action*/;
         mRightVerticalSwipeAppSelection.setVisible(extendedSwipe && isAppSelection);
 
-        int leftVerticalSwipeActions = Settings.System.getIntForUser(resolver,
-                Settings.System.LEFT_VERTICAL_BACK_SWIPE_ACTION, 0,
-                UserHandle.USER_CURRENT);
-        mLeftVerticalSwipeActions = (ListPreference) findPreference("left_vertical_swipe_actions");
-        mLeftVerticalSwipeActions.setValue(Integer.toString(leftVerticalSwipeActions));
-        mLeftVerticalSwipeActions.setSummary(mLeftVerticalSwipeActions.getEntry());
-        mLeftVerticalSwipeActions.setEnabled(extendedSwipe);
-        mLeftVerticalSwipeActions.setOnPreferenceChangeListener(this);
-
-        int rightVerticalSwipeActions = Settings.System.getIntForUser(resolver,
-                Settings.System.RIGHT_VERTICAL_BACK_SWIPE_ACTION, 0,
-                UserHandle.USER_CURRENT);
-        mRightVerticalSwipeActions = (ListPreference) findPreference("right_vertical_swipe_actions");
-        mRightVerticalSwipeActions.setValue(Integer.toString(rightVerticalSwipeActions));
-        mRightVerticalSwipeActions.setSummary(mRightVerticalSwipeActions.getEntry());
-        mRightVerticalSwipeActions.setEnabled(extendedSwipe);
-        mRightVerticalSwipeActions.setOnPreferenceChangeListener(this);
-
-        mLeftVerticalSwipeAppSelection = (Preference) findPreference("left_vertical_swipe_app_action");
-        isAppSelection = Settings.System.getIntForUser(resolver,
-                Settings.System.LEFT_VERTICAL_BACK_SWIPE_ACTION, 0, UserHandle.USER_CURRENT) == 5/*action_app_action*/;
-        mLeftVerticalSwipeAppSelection.setVisible(extendedSwipe && isAppSelection);
-
-        mRightVerticalSwipeAppSelection = (Preference) findPreference("right_vertical_swipe_app_action");
-        isAppSelection = Settings.System.getIntForUser(resolver,
-                Settings.System.RIGHT_VERTICAL_BACK_SWIPE_ACTION, 0, UserHandle.USER_CURRENT) == 5/*action_app_action*/;
-        mRightVerticalSwipeAppSelection.setVisible(extendedSwipe && isAppSelection);
-
         mGestureBarSize = (ListPreference) findPreference(KEY_GESTURE_BAR_SIZE);
         int gesturebarsize = Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.NAVIGATION_HANDLE_WIDTH, 2, UserHandle.USER_CURRENT);
