@@ -22,7 +22,6 @@ import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.database.ContentObserver;
-import android.os.Handler;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
@@ -63,8 +62,6 @@ public class QuickSettings extends SettingsPreferenceFragment
     private static final String QS_PANEL_COLOR = "qs_panel_color";
     private static final String QS_PANEL_ALPHA = "qs_panel_bg_alpha";
 
-    private Handler mHandler;
-
     private ListPreference mQuickPulldown;
     private ListPreference mTileAnimationStyle;
     private ListPreference mTileAnimationDuration;
@@ -75,8 +72,6 @@ public class QuickSettings extends SettingsPreferenceFragment
     private CustomSeekBarPreference mQsColumnsPort;
     private CustomSeekBarPreference mQsColumnsLand;
     private CustomSeekBarPreference mQsPanelAlpha;
-    private int mQsPanelAlphaValue;
-    private boolean mChangeQsPanelAlpha = true;
     private SystemSettingMasterSwitchPreference mCustomHeader;
     private SystemSettingMasterSwitchPreference mQsBlur;
     private SystemSettingEditTextPreference mFooterString;
@@ -273,20 +268,10 @@ public class QuickSettings extends SettingsPreferenceFragment
         } else if (preference == mQsPanelAlpha) {
             int qsTransparencyValue = (int) newValue;
             // Convert QS transparency value on scale of 0-100 to corresponding alpha values 255-100
-            mQsPanelAlphaValue = (int) (255 - (qsTransparencyValue * 155 / 100));
-
-            if (!mChangeQsPanelAlpha)
-                return true;
-            mChangeQsPanelAlpha = false;
+            alphaValue = (int) (255 - (qsTransparencyValue * 155 / 100));
             Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.QS_PANEL_BG_ALPHA, mQsPanelAlphaValue,
+                    Settings.System.QS_PANEL_BG_ALPHA, alphaValue,
                     UserHandle.USER_CURRENT);
-            mHandler.postDelayed(() -> {
-                    Settings.System.putIntForUser(getContentResolver(),
-                            Settings.System.QS_PANEL_BG_ALPHA, mQsPanelAlphaValue,
-                            UserHandle.USER_CURRENT);
-                    mChangeQsPanelAlpha = true;
-                }, 1000);
             return true;
         }
         return false;
