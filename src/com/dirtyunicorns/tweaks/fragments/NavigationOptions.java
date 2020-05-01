@@ -138,6 +138,7 @@ public class NavigationOptions extends SettingsPreferenceFragment
     private SystemSettingListPreference mTimeout;
     private SystemSettingSwitchPreference mNavigationArrowKeys;
     private SystemSettingSwitchPreference mExtendedSwipe;
+    private SystemSettingSwitchPreference mNavigationIMESpace;
 
     private int deviceKeys;
 
