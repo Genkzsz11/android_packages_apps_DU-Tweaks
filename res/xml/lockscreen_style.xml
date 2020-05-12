@@ -60,8 +60,8 @@
             android:key="lock_date_fonts"
             android:title="@string/lock_date_font_title"
             android:dialogTitle="@string/lock_date_font_dialog_title"
-            android:entries="@array/lock_clock_fonts_entries"
-            android:entryValues="@array/lock_clock_fonts_values"
+            android:entries="@array/lock_date_fonts_entries"
+            android:entryValues="@array/lock_date_fonts_values"
             android:summary="%s"
             android:defaultValue="28"
             android:persistent="false" />
@@ -83,8 +83,8 @@
             android:key="lock_ownerinfo_fonts"
             android:title="@string/lock_ownerinfo_font_title"
             android:dialogTitle="@string/lock_ownerinfo_font_dialog_title"
-            android:entries="@array/lock_clock_fonts_entries"
-            android:entryValues="@array/lock_clock_fonts_values"
+            android:entries="@array/lock_owner_fonts_entries"
+            android:entryValues="@array/lock_owner_fonts_values"
             android:summary="%s"
             android:defaultValue="28"
             android:persistent="false" />
