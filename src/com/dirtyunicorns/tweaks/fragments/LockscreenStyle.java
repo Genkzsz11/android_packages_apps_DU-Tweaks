@@ -76,7 +76,7 @@ public class LockscreenStyle extends SettingsPreferenceFragment
         // Lockscreen Clock Fonts
         mLockClockFonts = (ListPreference) findPreference(LOCK_CLOCK_FONTS);
         mLockClockFonts.setValue(String.valueOf(Settings.System.getInt(
-                getContentResolver(), Settings.System.LOCK_CLOCK_FONTS, 28)));
+                getContentResolver(), Settings.System.LOCK_CLOCK_FONTS, 45)));
         mLockClockFonts.setSummary(mLockClockFonts.getEntry());
         mLockClockFonts.setOnPreferenceChangeListener(this);
 
@@ -89,14 +89,14 @@ public class LockscreenStyle extends SettingsPreferenceFragment
         // Lockscreen Text Clock Fonts
         mTextClockFonts = (ListPreference) findPreference(CUSTOM_TEXT_CLOCK_FONTS);
         mTextClockFonts.setValue(String.valueOf(Settings.System.getInt(
-                getContentResolver(), Settings.System.CUSTOM_TEXT_CLOCK_FONTS, 32)));
+                getContentResolver(), Settings.System.CUSTOM_TEXT_CLOCK_FONTS, 28)));
         mTextClockFonts.setSummary(mTextClockFonts.getEntry());
         mTextClockFonts.setOnPreferenceChangeListener(this);
 
         // Lockscreen Date Fonts
         mLockDateFonts = (ListPreference) findPreference(LOCK_DATE_FONTS);
         mLockDateFonts.setValue(String.valueOf(Settings.System.getInt(
-                getContentResolver(), Settings.System.LOCK_DATE_FONTS, 28)));
+                getContentResolver(), Settings.System.LOCK_DATE_FONTS, 47)));
         mLockDateFonts.setSummary(mLockDateFonts.getEntry());
         mLockDateFonts.setOnPreferenceChangeListener(this);
 
@@ -115,7 +115,7 @@ public class LockscreenStyle extends SettingsPreferenceFragment
         // Lockscreen Owner Info Fonts
         mLockOwnerInfoFonts = (ListPreference) findPreference(LOCK_OWNERINFO_FONTS);
         mLockOwnerInfoFonts.setValue(String.valueOf(Settings.System.getInt(
-                getContentResolver(), Settings.System.LOCK_OWNERINFO_FONTS, 28)));
+                getContentResolver(), Settings.System.LOCK_OWNERINFO_FONTS, 50)));
         mLockOwnerInfoFonts.setSummary(mLockOwnerInfoFonts.getEntry());
         mLockOwnerInfoFonts.setOnPreferenceChangeListener(this);
 

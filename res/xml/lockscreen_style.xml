@@ -33,7 +33,7 @@
             android:entries="@array/lock_clock_fonts_entries"
             android:entryValues="@array/lock_clock_fonts_values"
             android:summary="%s"
-            android:defaultValue="28"
+            android:defaultValue="45"
             android:persistent="false" />
 
         <com.dirtyunicorns.support.preferences.CustomSeekBarPreference
@@ -60,10 +60,10 @@
             android:key="lock_date_fonts"
             android:title="@string/lock_date_font_title"
             android:dialogTitle="@string/lock_date_font_dialog_title"
-            android:entries="@array/lock_clock_fonts_entries"
-            android:entryValues="@array/lock_clock_fonts_values"
+            android:entries="@array/lock_date_fonts_entries"
+            android:entryValues="@array/lock_date_fonts_values"
             android:summary="%s"
-            android:defaultValue="28"
+            android:defaultValue="47"
             android:persistent="false" />
 
         <com.dirtyunicorns.support.preferences.CustomSeekBarPreference
@@ -83,10 +83,10 @@
             android:key="lock_ownerinfo_fonts"
             android:title="@string/lock_ownerinfo_font_title"
             android:dialogTitle="@string/lock_ownerinfo_font_dialog_title"
-            android:entries="@array/lock_clock_fonts_entries"
-            android:entryValues="@array/lock_clock_fonts_values"
+            android:entries="@array/lock_owner_fonts_entries"
+            android:entryValues="@array/lock_owner_fonts_values"
             android:summary="%s"
-            android:defaultValue="28"
+            android:defaultValue="50"
             android:persistent="false" />
 
         <com.dirtyunicorns.support.preferences.CustomSeekBarPreference
@@ -109,7 +109,7 @@
             android:entries="@array/lock_clock_fonts_entries"
             android:entryValues="@array/lock_clock_fonts_values"
             android:summary="%s"
-            android:defaultValue="32"
+            android:defaultValue="28"
             android:persistent="false" />
 
         <com.dirtyunicorns.support.preferences.CustomSeekBarPreference

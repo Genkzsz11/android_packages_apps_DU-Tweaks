@@ -115,7 +115,7 @@ public class ClockOptions extends SettingsPreferenceFragment
         mStatusBarSecondsShow.setOnPreferenceChangeListener(this);
 
         int clockStyle = Settings.System.getInt(resolver,
-                Settings.System.STATUSBAR_CLOCK_STYLE, 0);
+                Settings.System.STATUSBAR_CLOCK_STYLE, 47);
         mStatusBarClock.setValue(String.valueOf(clockStyle));
         mStatusBarClock.setSummary(mStatusBarClock.getEntry());
         mStatusBarClock.setOnPreferenceChangeListener(this);
