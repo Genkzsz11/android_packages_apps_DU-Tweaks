@@ -54,6 +54,15 @@ import java.util.List;
 
 public class DirtyTweaks extends SettingsPreferenceFragment {
 
+    private Context mContext;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        mContext = getActivity();
+        getActivity().setTitle(R.string.dirtytweaks_title);
+    }
+
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;

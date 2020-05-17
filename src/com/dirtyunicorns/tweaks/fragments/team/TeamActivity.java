@@ -1,69 +1,103 @@
-package com.cuberto.bubbletabsampleapp;
+/*
+ * Copyright (C) 2020 The Dirty Unicorns Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import android.graphics.Color;
+package com.dirtyunicorns.tweaks.fragments.team;
+
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Window;
+import android.view.WindowManager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.cuberto.bubbleicontabbarandroid.TabBubbleAnimator;
-import com.google.android.material.tabs.TabLayout;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class TeamActivity extends Activity {
 
-    private List<Fragment> mFragmentList = new ArrayList<>();
-    private TabBubbleAnimator tabBubbleAnimator;
-    private String[] titles = new String[]{"Home", "Clock", "Folder", "Menu"};
-    private int[] colors = new int[]{R.color.home, R.color.clock, R.color.folder, R.color.menu};
-
+    private List<DevInfoAdapter> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mFragmentList.add(new TabFragment(titles[0], colors[0]));
-        mFragmentList.add(new TabFragment(titles[1], colors[1]));
-        mFragmentList.add(new TabFragment(titles[2], colors[2]));
-        mFragmentList.add(new TabFragment(titles[3], colors[3]));
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return mFragmentList.get(position);
-            }
+        setContentView(R.layout.team_recyclerview);
 
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-        };
-        viewPager.setAdapter(adapter);
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
-        tabBubbleAnimator = new TabBubbleAnimator(tabLayout);
-        tabBubbleAnimator.addTabItem(titles[0], R.drawable.ic_grid, colors[0]);
-        tabBubbleAnimator.addTabItem(titles[1], R.drawable.ic_clock,colors[1]);
-        tabBubbleAnimator.addTabItem(titles[2], R.drawable.ic_folder, colors[2]);
-        tabBubbleAnimator.addTabItem(titles[3], R.drawable.ic_menu, colors[3]);
-        tabBubbleAnimator.setUnselectedColorId(Color.BLACK);
-        tabBubbleAnimator.highLightTab(0);
-        viewPager.addOnPageChangeListener(tabBubbleAnimator);
+        initTeam();
+
+        Window window = getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+    private void initTeam(){
+        RecyclerView mRecycleview = findViewById(R.id.listView);
+
+        setTeamMember("Genkzsz11", getString(R.string.developer_title)
+                + " / " + getString(R.string.maintainer_title), "Genkzsz11", "Genkzsz11", R.drawable.genkzsz11);
+        setTeamMember("Ritzz", getString(R.string.developer_title)
+                + " / " + getString(R.string.maintainer_title), "riteshm321", "ritzz97", R.drawable.ritzz);
+        setTeamMember("Jughead", getString(R.string.contributor_title), "", "jughead069",
+                R.drawable.jughead);        
+        setTeamMember("Rafiester", getString(R.string.developer_title)
+                + " / " + getString(R.string.maintainer_title), "Rafiester", "Rafiester", R.drawable.rafiester);
+        setTeamMember("Rizky Benggolo", getString(R.string.developer_title)
+                + " / " + getString(R.string.contributor_title), "travarilo", "travarilo", R.drawable.travarilo);
+        setTeamMember("Andra Ramadan", getString(R.string.contributor_title), "andrraa", "Andrraa",
+                R.drawable.andra);
+        setTeamMember("JulianSurya", getString(R.string.maintainer_title), "juliansurya", "JulianSurya",
+                R.drawable.juliansurya);
+        setTeamMember("Aoihara", getString(R.string.maintainer_title), "Aoihara", "Aoihara",
+                R.drawable.aoihara);
+        setTeamMember("OGHyperion", getString(R.string.maintainer_title), "OGHyperion", "OGHyperion",
+                R.drawable.OGHyperion);
+        setTeamMember("Hatsune", getString(R.string.maintainer_title), "Hatsune71", "hats721",
+                R.drawable.hatsune);
+        setTeamMember("Ronald Santos", getString(R.string.maintainer_title), "ronald-b", "RonaldSt",
+                R.drawable.ronald);
+        setTeamMember("Shivam Kumar", getString(R.string.maintainer_title), "ShivamKumar2002", "ShivamKumar2002",
+                R.drawable.shivam);
+        setTeamMember("Samuel", getString(R.string.maintainer_title), "DeadmanxXD", "deadmanxxd",
+                R.drawable.deadmanxxd);
+        setTeamMember("Takeshiro", getString(R.string.maintainer_title), "Takeshiro04", "Takeshiro04",
+                R.drawable.takeshiro);
+        setTeamMember("Zeeshan", getString(R.string.maintainer_title), "HeartStealer786", "NAHSEEZ",
+                R.drawable.zeeshan);
+        setTeamMember("Icecream", getString(R.string.maintainer_title), "1cecreamm", "iicecreamm",
+                R.drawable.icecream);
+
+        ListAdapter mAdapter = new ListAdapter(mList);
+        mRecycleview.setAdapter(mAdapter);
+        mRecycleview.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        tabBubbleAnimator.onStart((TabLayout) findViewById(R.id.tabLayout));
-    }
+    private void setTeamMember(String devName, String devTitle,
+                               String githubLink, String telegram, int devImage) {
+        DevInfoAdapter adapter;
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        tabBubbleAnimator.onStop();
+        adapter = new DevInfoAdapter();
+        adapter.setImage(devImage);
+        adapter.setDevName(devName);
+        adapter.setDevTitle(devTitle);
+        adapter.setGithubName(githubLink);
+        adapter.setTelegramName(telegram);
+        mList.add(adapter);
     }
 }

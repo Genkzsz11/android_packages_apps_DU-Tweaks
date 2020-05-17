@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.dirtyunicorns.bubbleicontabbarandroid.TabBubbleAnimator;
+import com.dirtyunicorns.tweaks.tabs.TabBubbleAnimator;
 import com.google.android.material.tabs.TabLayout;
 
 import com.dirtyunicorns.tweaks.tabs.Lockscreen;
