@@ -78,7 +78,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
         mFragmentList.add(new Statusbar(titles[2], colors[2]));
         mFragmentList.add(new Hardware(titles[3], colors[3]));
         final ViewPager viewPager = view.findViewById(R.id.viewPager);
-        final tabLayout = view.findViewById(R.id.tabLayout);
+        tabLayout = view.findViewById(R.id.tabLayout);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getFragmentManager()) {
@@ -91,7 +91,6 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
             public int getCount() {
                 return mFragmentList.size();
             }
-        return view;
         };
         tabBubbleAnimator = new TabBubbleAnimator(tabLayout);
         tabBubbleAnimator.addTabItem(titles[0], R.drawable.ic_system, colors[0]);
@@ -101,6 +100,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
         tabBubbleAnimator.setUnselectedColorId(Color.BLACK);
         tabBubbleAnimator.highLightTab(0);
         viewPager.addOnPageChangeListener(tabBubbleAnimator);
+        return view;
     }
 
     @Override
