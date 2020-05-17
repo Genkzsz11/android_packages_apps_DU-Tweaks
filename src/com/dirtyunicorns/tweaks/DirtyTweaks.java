@@ -53,6 +53,9 @@ import com.dirtyunicorns.tweaks.tabs.Hardware;
 import com.dirtyunicorns.tweaks.tabs.Statusbar;
 import com.dirtyunicorns.tweaks.tabs.System;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DirtyTweaks extends SettingsPreferenceFragment {
 
     private String title;
