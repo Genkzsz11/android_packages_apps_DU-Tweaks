@@ -48,72 +48,11 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.dirtyunicorns.tweaks.fragments.team.TeamActivity;
-import com.dirtyunicorns.tweaks.tabs.Lockscreen;
-import com.dirtyunicorns.tweaks.tabs.Hardware;
-import com.dirtyunicorns.tweaks.tabs.Statusbar;
-import com.dirtyunicorns.tweaks.tabs.System;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DirtyTweaks extends SettingsPreferenceFragment {
-
-    private String title;
-    private int colorId;
-    private MenuItem mMenuItem;
-    private Context mContext;
-    private TabBubbleAnimator tabBubbleAnimator;
-    private String[] titles = new String[]{"System", "Lockscreen", "Statusbar", "Hardware"};
-    private int[] colors = new int[]{R.color.system, R.color.lockscreen, R.color.statusbar, R.color.hardware};
-    private List<Fragment> mFragmentList = new ArrayList<>();
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mContext = getActivity();
-        getActivity().setTitle(R.string.dirtytweaks_title);
-        View view = inflater.inflate(R.layout.dirtytweaks, container, false);
-        mFragmentList.add(new System(titles[0], colors[0]));
-        mFragmentList.add(new Lockscreen(titles[1], colors[1]));
-        mFragmentList.add(new Statusbar(titles[2], colors[2]));
-        mFragmentList.add(new Hardware(titles[3], colors[3]));
-        final ViewPager viewPager = view.findViewById(R.id.viewPager);
-        tabLayout = view.findViewById(R.id.tabLayout);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return mFragmentList.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-        };
-        tabBubbleAnimator = new TabBubbleAnimator(tabLayout);
-        tabBubbleAnimator.addTabItem(titles[0], R.drawable.ic_system, colors[0]);
-        tabBubbleAnimator.addTabItem(titles[1], R.drawable.ic_lockscreen,colors[1]);
-        tabBubbleAnimator.addTabItem(titles[2], R.drawable.ic_statusbar, colors[2]);
-        tabBubbleAnimator.addTabItem(titles[3], R.drawable.ic_hardware, colors[3]);
-        tabBubbleAnimator.setUnselectedColorId(Color.BLACK);
-        tabBubbleAnimator.highLightTab(0);
-        viewPager.addOnPageChangeListener(tabBubbleAnimator);
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        tabBubbleAnimator.onStart((TabLayout) getView().findViewById(R.id.tabLayout));
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        tabBubbleAnimator.onStop();
-    }
 
     @Override
     public int getMetricsCategory() {
