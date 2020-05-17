@@ -18,6 +18,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import com.dirtyunicorns.tweaks.R
+
+import com.dirtyunicorns.tweaks.preferences.TextColorTransition;
+
 import java.util.ArrayList;
 import java.util.List;
 

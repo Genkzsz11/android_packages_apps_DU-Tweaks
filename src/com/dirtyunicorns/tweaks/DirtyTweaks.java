@@ -53,8 +53,7 @@ import com.dirtyunicorns.tweaks.tabs.Hardware;
 import com.dirtyunicorns.tweaks.tabs.Statusbar;
 import com.dirtyunicorns.tweaks.tabs.System;
 
-public class DirtyTweaks extends SettingsPreferenceFragment implements   
-       Preference.OnPreferenceChangeListener {
+public class DirtyTweaks extends SettingsPreferenceFragment {
 
     private String title;
     private int colorId;
@@ -66,8 +65,8 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
     private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         mContext = getActivity();
         getActivity().setTitle(R.string.dirtytweaks_title);
         setContentView(R.layout.dirtytweaks);
@@ -75,8 +74,8 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         mFragmentList.add(new Lockscreen(titles[1], colors[1]));
         mFragmentList.add(new Statusbar(titles[2], colors[2]));
         mFragmentList.add(new Hardware(titles[3], colors[3]));
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+        ViewPager viewPager = view.findViewById(R.id.viewPager);
+        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return mFragmentList.get(position);
@@ -88,7 +87,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
             }
         };
         viewPager.setAdapter(adapter);
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        TabLayout tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         tabBubbleAnimator = new TabBubbleAnimator(tabLayout);
         tabBubbleAnimator.addTabItem(titles[0], R.drawable.ic_system, colors[0]);
@@ -101,13 +100,13 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
-        tabBubbleAnimator.onStart((TabLayout) findViewById(R.id.tabLayout));
+        tabBubbleAnimator.onStart((TabLayout) view.findViewById(R.id.tabLayout));
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         tabBubbleAnimator.onStop();
     }
