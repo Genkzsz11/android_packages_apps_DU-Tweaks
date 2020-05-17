@@ -77,7 +77,10 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
         mFragmentList.add(new Lockscreen(titles[1], colors[1]));
         mFragmentList.add(new Statusbar(titles[2], colors[2]));
         mFragmentList.add(new Hardware(titles[3], colors[3]));
-        ViewPager viewPager = view.findViewById(R.id.viewPager);
+        final ViewPager viewPager = view.findViewById(R.id.viewPager);
+        final tabLayout = view.findViewById(R.id.tabLayout);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
         FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -88,10 +91,8 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
             public int getCount() {
                 return mFragmentList.size();
             }
+        return view;
         };
-        viewPager.setAdapter(adapter);
-        TabLayout tabLayout = view.findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
         tabBubbleAnimator = new TabBubbleAnimator(tabLayout);
         tabBubbleAnimator.addTabItem(titles[0], R.drawable.ic_system, colors[0]);
         tabBubbleAnimator.addTabItem(titles[1], R.drawable.ic_lockscreen,colors[1]);
@@ -105,7 +106,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
     @Override
     public void onStart() {
         super.onStart();
-        tabBubbleAnimator.onStart((TabLayout) view.findViewById(R.id.tabLayout));
+        tabBubbleAnimator.onStart((TabLayout) getView().findViewById(R.id.tabLayout));
     }
 
     @Override
