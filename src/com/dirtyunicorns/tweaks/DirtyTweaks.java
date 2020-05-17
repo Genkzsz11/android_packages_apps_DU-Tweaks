@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.provider.Settings;
+import android.graphics.Color;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -33,17 +34,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.viewpager.widget.ViewPager;
+import androidx.annotation.Nullable;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import com.dirtyunicorns.tweaks.preferences.TabBubbleAnimator;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import com.dirtyunicorns.tweaks.fragments.team.TeamActivity;
 import com.dirtyunicorns.tweaks.tabs.Lockscreen;
@@ -54,119 +56,60 @@ import com.dirtyunicorns.tweaks.tabs.System;
 public class DirtyTweaks extends SettingsPreferenceFragment implements   
        Preference.OnPreferenceChangeListener {
 
+    private String title;
+    private int colorId;
     private MenuItem mMenuItem;
     private Context mContext;
+    private TabBubbleAnimator tabBubbleAnimator;
+    private String[] titles = new String[]{"System", "Lockscreen", "Statusbar", "Hardware"};
+    private int[] colors = new int[]{R.color.system, R.color.lockscreen, R.color.statusbar, R.color.hardware};
+    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mContext = getActivity();
-        View view = inflater.inflate(R.layout.dirtytweaks, container, false);
-
         getActivity().setTitle(R.string.dirtytweaks_title);
-
-        final BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
-        final ViewPager viewPager = view.findViewById(R.id.viewpager);
-        PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
-        viewPager.setAdapter(mPagerAdapter);
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+        setContentView(R.layout.dirtytweaks);
+        mFragmentList.add(new System(titles[0], colors[0]));
+        mFragmentList.add(new Lockscreen(titles[1], colors[1]));
+        mFragmentList.add(new Statusbar(titles[2], colors[2]));
+        mFragmentList.add(new Hardware(titles[3], colors[3]));
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-              if (item.getItemId() == navigation.getSelectedItemId()) {
-              return false;
-              } else {
-                switch(item.getItemId()){
-                    case R.id.system:
-                        viewPager.setCurrentItem(0);
-                        break;
-                     case R.id.lockscreen:
-                        viewPager.setCurrentItem(1);
-                        break;
-                     case R.id.statusbar:
-                        viewPager.setCurrentItem(2);
-                        break;
-                     case R.id.hardware:
-                        viewPager.setCurrentItem(3);
-                        break;
-                   }
-                return true;
-               }
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+            public Fragment getItem(int position) {
+                return mFragmentList.get(position);
             }
 
             @Override
-            public void onPageSelected(int position) {
-                if(mMenuItem != null) {
-                    mMenuItem.setChecked(false);
-                } else {
-                    navigation.getMenu().getItem(0).setChecked(false);
-                }
-                navigation.getMenu().getItem(position).setChecked(true);
-                mMenuItem = navigation.getMenu().getItem(position);
+            public int getCount() {
+                return mFragmentList.size();
             }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
-        setHasOptionsMenu(true);
-        navigation.setSelectedItemId(R.id.system);
-        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-        return view;
+        };
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+        tabBubbleAnimator = new TabBubbleAnimator(tabLayout);
+        tabBubbleAnimator.addTabItem(titles[0], R.drawable.ic_system, colors[0]);
+        tabBubbleAnimator.addTabItem(titles[1], R.drawable.ic_lockscreen,colors[1]);
+        tabBubbleAnimator.addTabItem(titles[2], R.drawable.ic_statusbar, colors[2]);
+        tabBubbleAnimator.addTabItem(titles[3], R.drawable.ic_hardware, colors[3]);
+        tabBubbleAnimator.setUnselectedColorId(Color.BLACK);
+        tabBubbleAnimator.highLightTab(0);
+        viewPager.addOnPageChangeListener(tabBubbleAnimator);
     }
 
-    class PagerAdapter extends FragmentPagerAdapter {
-
-        String titles[] = getTitles();
-        private Fragment frags[] = new Fragment[titles.length];
-
-        PagerAdapter(FragmentManager fm) {
-            super(fm);
-            frags[0] = new System();
-            frags[1] = new Lockscreen();
-            frags[2] = new Statusbar();
-            frags[3] = new Hardware();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return frags[position];
-        }
-
-        @Override
-        public int getCount() {
-            return frags.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tabBubbleAnimator.onStart((TabLayout) findViewById(R.id.tabLayout));
     }
 
-    private String[] getTitles() {
-        String titleString[];
-        titleString = new String[]{
-                getString(R.string.bottom_nav_system_title),
-                getString(R.string.bottom_nav_lockscreen_title),
-                getString(R.string.bottom_nav_statusbar_title),
-                getString(R.string.bottom_nav_hardware_title)};
-
-        return titleString;
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        return true;
+    @Override
+    protected void onStop() {
+        super.onStop();
+        tabBubbleAnimator.onStop();
     }
 
     @Override

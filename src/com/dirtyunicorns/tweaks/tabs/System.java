@@ -23,6 +23,15 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceFragment;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -30,10 +39,17 @@ import com.android.settings.SettingsPreferenceFragment;
 public class System extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
+    private String title;
+    private int colorId;
 
     private static final String CORVUS_PARTS_CATEGORY = "corvus_parts_category";
     private static final String NOTIFICATIONS_CATEGORY = "notifications_category";
     private static final String MISC_CATEGORY = "miscellaneous_category";
+
+    public System(String title, int colorId) {
+        this.title = title;
+        this.colorId = colorId;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +80,25 @@ public class System extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setRetainInstance(true);
+        return inflater.inflate(R.layout.fragment_one, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        TextView textView = getView().findViewById(R.id.tab_title);
+        textView.setText(title);
+        textView.setTextColor(ContextCompat.getColor(getContext(), colorId));
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
