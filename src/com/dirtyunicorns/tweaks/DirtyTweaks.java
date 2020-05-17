@@ -65,11 +65,11 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
     private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         mContext = getActivity();
         getActivity().setTitle(R.string.dirtytweaks_title);
-        setContentView(R.layout.dirtytweaks);
+        View view = inflater.inflate(R.layout.dirtytweaks, container, false);
         mFragmentList.add(new System(titles[0], colors[0]));
         mFragmentList.add(new Lockscreen(titles[1], colors[1]));
         mFragmentList.add(new Statusbar(titles[2], colors[2]));
