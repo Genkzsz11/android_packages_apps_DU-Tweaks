@@ -134,7 +134,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         });
 
         setHasOptionsMenu(true);
-        bottomNavigation.setId(R.id.system);
+        bottomNavigation.show(R.id.system);
         return view;
     }
 
