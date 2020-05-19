@@ -109,13 +109,6 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
             @Override
             public void onPageSelected(int position) {
-                if (mModel != null) {
-                    mModel.setModels(false);
-                }
-
-                bottomNavigation.getId().isShowing(position);
-
-                mModel = bottomNavigation.getId().isShowing(position);
             }
 
             @Override
