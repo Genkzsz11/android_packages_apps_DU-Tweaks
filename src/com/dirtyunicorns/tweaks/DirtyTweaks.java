@@ -59,6 +59,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
     private MenuItem mMenuItem;
     private Context mContext;
+    private Model mModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,18 +80,9 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
 
-        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-            }
-        });
-
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
-              if (item.getItemId() == bottomNavigation.isShowing()) {
-                return false;
-                } else {
                 switch (item.getId()) {
                     case R.id.system:
                         viewPager.setCurrentItem(0);
@@ -106,9 +98,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
                         break;
                     default:
                 }
-               return true;
             }
-         }
       });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -119,13 +109,13 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
             @Override
             public void onPageSelected(int position) {
-                if(Model != null) {
-                    Model.setModels(false);
-                } else {
-                    bottomNavigation.getId().getModelPosition(0);
+                if (mModel != null) {
+                    mModel.setModels(false);
                 }
-                bottomNavigation.getId().getModelPosition(position);
-                Model = bottomNavigation.getId().getModelPosition(position);
+
+                bottomNavigation.getId().isShowing(position);
+
+                mModel = bottomNavigation.getId().isShowing(position);
             }
 
             @Override
@@ -134,7 +124,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         });
 
         setHasOptionsMenu(true);
-        bottomNavigation.show(R.id.system);
+        bottomNavigation.show(R.id.system,true);
         return view;
     }
 
