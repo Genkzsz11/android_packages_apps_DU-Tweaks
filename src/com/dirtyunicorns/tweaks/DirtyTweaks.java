@@ -68,17 +68,16 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
         getActivity().setTitle(R.string.dirtytweaks_title);
 
-        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
+        MeowBottomNavigation bottomNavigation = view.findViewById(R.id.bottomNavigation);
 
-        bottomNavigation.add(new Lockscreen.Model(R.drawable.bottomnav_lockscreen));
-        bottomNavigation.add(new Hardware.Model(R.drawable.bottomnav_hardware));
-        bottomNavigation.add(new Statusbar.Model(R.drawable.bottomnav_statusbar));
-        bottomNavigation.add(new System.Model(R.drawable.bottomnav_system));
+        bottomNavigation.add(new MeowBottomNavigation.Model(R.id.lockscreen, R.drawable.bottomnav_lockscreen));
+        bottomNavigation.add(new MeowBottomNavigation.Model(R.id.hardware, R.drawable.bottomnav_hardware));
+        bottomNavigation.add(new MeowBottomNavigation.Model(R.id.statusbar, R.drawable.bottomnav_statusbar));
+        bottomNavigation.add(new MeowBottomNavigation.Model(R.id.system, R.drawable.bottomnav_system));
 
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
-                Toast.makeText(DirtyTweaks.this, "clicked item : " + item.getId(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -108,7 +107,6 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
             public void onReselectItem(MeowBottomNavigation.Model item) {
-                Toast.makeText(DirtyTweaks.this, "reselected item : " + item.getId(), Toast.LENGTH_SHORT).show();
             }
         });
         return view;
