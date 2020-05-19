@@ -89,6 +89,8 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
               if (item.getItemId() == bottomNavigation.isShowing()) {
+                return false;
+                } else {
                 switch (item.getId()) {
                     case R.id.system:
                         viewPager.setCurrentItem(0);
@@ -104,8 +106,10 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
                         break;
                     default:
                 }
+               return true;
             }
-        });
+         }
+      });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
