@@ -1,4 +1,4 @@
-package com.dirtyunicorns.tweaks.tab;
+package com.dirtyunicorns.tweaks.tabs;
 
 import android.graphics.Color;
 import android.os.Bundle;

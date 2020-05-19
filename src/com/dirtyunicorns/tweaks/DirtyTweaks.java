@@ -48,6 +48,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.dirtyunicorns.tweaks.fragments.team.TeamActivity;
+import com.dirtyunicorns.tweaks.fragments.tabs.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +58,17 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
     private Context mContext;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
         getActivity().setTitle(R.string.dirtytweaks_title);
+        View view = inflater.inflate(R.layout.dirtytweaks, container, false);
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 
     @Override
