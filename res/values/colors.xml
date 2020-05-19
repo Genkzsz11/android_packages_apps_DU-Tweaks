@@ -22,6 +22,10 @@
     <color name="homepage_du_background">#D32F2F</color>
     <color name="cardview_bg">#33CFCFCF</color>
 
+    <color name="colorPrimary">#18c0d4</color>
+    <color name="colorPrimaryDark">#18c0d4</color>
+    <color name="colorAccent">#D81B60</color>
+
     <!-- Bottom navigation bar -->
     <color name="material_grey500">#ff9e9e9e</color>
 

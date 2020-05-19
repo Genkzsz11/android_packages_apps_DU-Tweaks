@@ -50,6 +50,7 @@ import com.dirtyunicorns.tweaks.tabs.Lockscreen;
 import com.dirtyunicorns.tweaks.tabs.Hardware;
 import com.dirtyunicorns.tweaks.tabs.Statusbar;
 import com.dirtyunicorns.tweaks.tabs.System;
+import com.dirtyunicorns.tweaks.navigation.MeowBottomNavigation;
 
 public class DirtyTweaks extends SettingsPreferenceFragment implements   
        Preference.OnPreferenceChangeListener {
@@ -65,103 +66,50 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
         getActivity().setTitle(R.string.dirtytweaks_title);
 
-        final BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
-        final ViewPager viewPager = view.findViewById(R.id.viewpager);
-        PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
-        viewPager.setAdapter(mPagerAdapter);
+        MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigation.add(new MeowBottomNavigation.Model(Lockscreen));
+        bottomNavigation.add(new MeowBottomNavigation.Model(Hardware));
+        bottomNavigation.add(new MeowBottomNavigation.Model(Statusbar));
+        bottomNavigation.add(new MeowBottomNavigation.Model(System));
 
+        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-              if (item.getItemId() == navigation.getSelectedItemId()) {
-              return false;
-              } else {
-                switch(item.getItemId()){
+            public void onClickItem(MeowBottomNavigation.Model item) {
+                Toast.makeText(DirtyTweaks.this, "clicked item : " + item.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+            @Override
+            public void onShowItem(MeowBottomNavigation.Model item) {
+                String name;
+                switch (item.getId()) {
                     case R.id.system:
-                        viewPager.setCurrentItem(0);
+                        name = "System";
                         break;
-                     case R.id.lockscreen:
-                        viewPager.setCurrentItem(1);
+                    case R.id.lockscreen:
+                        name = "Lockscreen";
                         break;
-                     case R.id.statusbar:
-                        viewPager.setCurrentItem(2);
+                    case R.id.statusbar:
+                        name = "StatusBar";
                         break;
-                     case R.id.hardware:
-                        viewPager.setCurrentItem(3);
+                    case R.id.hardware:
+                        name = "Hardware";
                         break;
-                   }
-                return true;
-               }
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(mMenuItem != null) {
-                    mMenuItem.setChecked(false);
-                } else {
-                    navigation.getMenu().getItem(0).setChecked(false);
+                    default:
+                        name = "";
                 }
-                navigation.getMenu().getItem(position).setChecked(true);
-                mMenuItem = navigation.getMenu().getItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
             }
         });
 
-        setHasOptionsMenu(true);
-        navigation.setSelectedItemId(R.id.system);
-        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+            @Override
+            public void onReselectItem(MeowBottomNavigation.Model item) {
+                Toast.makeText(DirtyTweaks.this, "reselected item : " + item.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
-    }
-
-    class PagerAdapter extends FragmentPagerAdapter {
-
-        String titles[] = getTitles();
-        private Fragment frags[] = new Fragment[titles.length];
-
-        PagerAdapter(FragmentManager fm) {
-            super(fm);
-            frags[0] = new System();
-            frags[1] = new Lockscreen();
-            frags[2] = new Statusbar();
-            frags[3] = new Hardware();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return frags[position];
-        }
-
-        @Override
-        public int getCount() {
-            return frags.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
-        }
-    }
-
-    private String[] getTitles() {
-        String titleString[];
-        titleString = new String[]{
-                getString(R.string.bottom_nav_system_title),
-                getString(R.string.bottom_nav_lockscreen_title),
-                getString(R.string.bottom_nav_statusbar_title),
-                getString(R.string.bottom_nav_hardware_title)};
-
-        return titleString;
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
