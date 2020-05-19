@@ -9,6 +9,8 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.dirtyunicorns.tweaks.R;
+
 /**
  * Created by 1HE on 2020-02-01.
  */

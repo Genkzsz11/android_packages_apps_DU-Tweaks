@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dirtyunicorns.tweaks.R;
+
 import java.util.HashMap;
 
 /**

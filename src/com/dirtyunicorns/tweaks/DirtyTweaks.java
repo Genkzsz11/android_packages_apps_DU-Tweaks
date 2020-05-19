@@ -41,6 +41,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
@@ -68,10 +70,10 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
         MeowBottomNavigation bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        bottomNavigation.add(new MeowBottomNavigation.Model(Lockscreen));
-        bottomNavigation.add(new MeowBottomNavigation.Model(Hardware));
-        bottomNavigation.add(new MeowBottomNavigation.Model(Statusbar));
-        bottomNavigation.add(new MeowBottomNavigation.Model(System));
+        bottomNavigation.add(new Lockscreen.Model(R.drawable.bottomnav_lockscreen));
+        bottomNavigation.add(new Hardware.Model(R.drawable.bottomnav_hardware));
+        bottomNavigation.add(new Statusbar.Model(R.drawable.bottomnav_statusbar));
+        bottomNavigation.add(new System.Model(R.drawable.bottomnav_system));
 
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override

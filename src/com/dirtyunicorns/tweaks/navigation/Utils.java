@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import androidx.core.content.ContextCompat;
 
+import com.dirtyunicorns.tweaks.R;
+
 /**
  * Created by 1HE on 2020-02-01.
  */

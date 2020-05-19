@@ -8,6 +8,8 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
+import com.dirtyunicorns.tweaks.R;
+
 /**
  * Created by 1HE on 2020-02-02.
  */

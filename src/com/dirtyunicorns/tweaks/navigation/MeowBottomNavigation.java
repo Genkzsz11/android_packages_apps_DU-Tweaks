@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.dirtyunicorns.tweaks.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
