@@ -80,6 +80,13 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
 
+        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
+            @Override
+            public void onClickItem(MeowBottomNavigation.Model item) {
+                Toast.makeText(mContext, "clicked item : " + item.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
@@ -100,6 +107,13 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
                 }
             }
       });
+
+        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+            @Override
+            public void onReselectItem(MeowBottomNavigation.Model item) {
+                Toast.makeText(mContext, "reselected item : " + item.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
