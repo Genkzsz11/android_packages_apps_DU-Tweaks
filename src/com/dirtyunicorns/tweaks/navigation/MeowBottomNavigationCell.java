@@ -1,4 +1,4 @@
-package com.dirtyunicorns.tweaks.navigation.meowbottomnavigation;
+package com.dirtyunicorns.tweaks.navigation;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -8,8 +8,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import androidx.view.ViewCompat;
-import androidx.view.animation.FastOutSlowInInterpolator;
+import androidx.core.view.ViewCompat;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;

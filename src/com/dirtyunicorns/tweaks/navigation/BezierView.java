@@ -1,4 +1,4 @@
-package com.dirtyunicorns.tweaks.navigation.meowbottomnavigation;
+package com.dirtyunicorns.tweaks.navigation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

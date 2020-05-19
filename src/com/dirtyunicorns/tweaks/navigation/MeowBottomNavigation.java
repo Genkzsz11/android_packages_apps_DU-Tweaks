@@ -1,4 +1,4 @@
-package com.dirtyunicorns.tweaks.navigation.meowbottomnavigation;
+package com.dirtyunicorns.tweaks.navigation;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
-import androidx.view.animation.FastOutSlowInInterpolator;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;

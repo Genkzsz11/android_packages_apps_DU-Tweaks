@@ -1,10 +1,10 @@
-package com.dirtyunicorns.tweaks.navigation.meowbottomnavigation;
+package com.dirtyunicorns.tweaks.navigation;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import androidx.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * Created by 1HE on 2020-02-01.

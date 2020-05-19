@@ -1,11 +1,11 @@
-package com.dirtyunicorns.tweaks.navigation.meowbottomnavigation;
+package com.dirtyunicorns.tweaks.navigation;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import androidx.view.animation.FastOutSlowInInterpolator;
-import androidx.widget.AppCompatImageView;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 /**
