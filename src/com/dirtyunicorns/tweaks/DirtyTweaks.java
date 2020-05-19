@@ -75,6 +75,10 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         bottomNavigation.add(new MeowBottomNavigation.Model(R.id.statusbar, R.drawable.bottomnav_statusbar));
         bottomNavigation.add(new MeowBottomNavigation.Model(R.id.system, R.drawable.bottomnav_system));
 
+        final ViewPager viewPager = view.findViewById(R.id.viewpager);
+        PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
+        viewPager.setAdapter(mPagerAdapter);
+
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
@@ -84,32 +88,90 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
-                String name;
+              if (item.getItemId() == bottomNavigation.isShowing()) {
                 switch (item.getId()) {
                     case R.id.system:
-                        name = "System";
+                        viewPager.setCurrentItem(0);
                         break;
                     case R.id.lockscreen:
-                        name = "Lockscreen";
+                        viewPager.setCurrentItem(1);
                         break;
                     case R.id.statusbar:
-                        name = "StatusBar";
+                        viewPager.setCurrentItem(2);
                         break;
                     case R.id.hardware:
-                        name = "Hardware";
+                        viewPager.setCurrentItem(3);
                         break;
                     default:
-                        name = "";
                 }
             }
         });
 
-        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
+            public void onPageScrolled(int position, float positionOffset,
+                                       int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(Model != null) {
+                    Model.setModels(false);
+                } else {
+                    bottomNavigation.getId().getModelPosition(0);
+                }
+                bottomNavigation.getId().getModelPosition(position);
+                Model = bottomNavigation.getId().getModelPosition(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
             }
         });
+
+        setHasOptionsMenu(true);
+        bottomNavigation.setId(R.id.system);
         return view;
+    }
+
+    class PagerAdapter extends FragmentPagerAdapter {
+
+        String titles[] = getTitles();
+        private Fragment frags[] = new Fragment[titles.length];
+
+        PagerAdapter(FragmentManager fm) {
+            super(fm);
+            frags[0] = new System();
+            frags[1] = new Lockscreen();
+            frags[2] = new Statusbar();
+            frags[3] = new Hardware();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return frags[position];
+        }
+
+        @Override
+        public int getCount() {
+            return frags.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
+        }
+    }
+
+    private String[] getTitles() {
+        String titleString[];
+        titleString = new String[]{
+                getString(R.string.bottom_nav_system_title),
+                getString(R.string.bottom_nav_lockscreen_title),
+                getString(R.string.bottom_nav_statusbar_title),
+                getString(R.string.bottom_nav_hardware_title)};
+
+        return titleString;
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
