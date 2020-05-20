@@ -29,14 +29,12 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="20dp"
-        android:minHeight="?actionBarSize"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        app:tabGravity="fill"
-        app:tabIndicatorHeight="0dp"
+        style="@style/CustomTab"
+        app:elevation="0dp"
         app:tabMode="fixed" />
 
 </RelativeLayout>
