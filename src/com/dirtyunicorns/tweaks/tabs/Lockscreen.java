@@ -39,6 +39,7 @@ public class Lockscreen extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lockscreen);
+        setRetainInstance(true);
 
         Preference LockscreenItems = findPreference(LOCKSCREEN_ITEMS_CATEGORY);
         if (!getResources().getBoolean(R.bool.has_lockscreen_items)) {

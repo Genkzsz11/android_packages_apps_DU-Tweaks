@@ -42,6 +42,7 @@ public class Statusbar extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.statusbar);
+        setRetainInstance(true);
 
         Preference BatteryOptions = findPreference(BATTERY_CATEGORY);
         if (!getResources().getBoolean(R.bool.has_battery_options)) {

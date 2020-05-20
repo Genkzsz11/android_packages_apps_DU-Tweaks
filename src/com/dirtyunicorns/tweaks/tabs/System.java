@@ -39,6 +39,7 @@ public class System extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.system);
+        setRetainInstance(true);
 
         Preference CorvusParts = findPreference(CORVUS_PARTS_CATEGORY);
         if (!getResources().getBoolean(R.bool.has_corvus_parts_available)) {

@@ -42,8 +42,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.dirtyunicorns.tweaks.tabs.TabBubbleAnimator;
+import com.google.android.material.tabs.TabLayout;
 
 import com.dirtyunicorns.tweaks.fragments.team.TeamActivity;
 import com.dirtyunicorns.tweaks.tabs.Lockscreen;
@@ -51,11 +51,21 @@ import com.dirtyunicorns.tweaks.tabs.Hardware;
 import com.dirtyunicorns.tweaks.tabs.Statusbar;
 import com.dirtyunicorns.tweaks.tabs.System;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class DirtyTweaks extends SettingsPreferenceFragment implements   
        Preference.OnPreferenceChangeListener {
 
     private MenuItem mMenuItem;
     private Context mContext;
+    private ViewPager mViewpager;
+    private TabBubbleAnimator mTabBubbleAnimator;
+    private TabLayout mTabLayout;
+    private String[] titles = new String[]{"System", "Lockscreen", "Statusbar", "Hardware"};
+    private int[] colors = new int[]{R.color.system, R.color.lockscreen, R.color.statusbar, R.color.hardware};
+    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,104 +74,44 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         View view = inflater.inflate(R.layout.dirtytweaks, container, false);
 
         getActivity().setTitle(R.string.dirtytweaks_title);
-
-        final BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
-        final ViewPager viewPager = view.findViewById(R.id.viewpager);
-        PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
-        viewPager.setAdapter(mPagerAdapter);
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-              if (item.getItemId() == navigation.getSelectedItemId()) {
-              return false;
-              } else {
-                switch(item.getItemId()){
-                    case R.id.system:
-                        viewPager.setCurrentItem(0);
-                        break;
-                     case R.id.lockscreen:
-                        viewPager.setCurrentItem(1);
-                        break;
-                     case R.id.statusbar:
-                        viewPager.setCurrentItem(2);
-                        break;
-                     case R.id.hardware:
-                        viewPager.setCurrentItem(3);
-                        break;
-                   }
-                return true;
-               }
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(mMenuItem != null) {
-                    mMenuItem.setChecked(false);
-                } else {
-                    navigation.getMenu().getItem(0).setChecked(false);
-                }
-                navigation.getMenu().getItem(position).setChecked(true);
-                mMenuItem = navigation.getMenu().getItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
-        setHasOptionsMenu(true);
-        navigation.setSelectedItemId(R.id.system);
-        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+        mTabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        mTabLayout.setViewPager(mViewpager);
+        mTabBubbleAnimator = new TabBubbleAnimator(mTabLayout);
+        PagerAdapter.setAdapter(new PagerAdapter(getFragmentManager()));
+        mViewpager = (ViewPager) view.findViewById(R.id.viewpager);
+        mViewpager.addOnPageChangeListener(mTabBubbleAnimator);
+        oninit();
         return view;
+    }
+
+    public void onInit() {
+        mTabBubbleAnimator.setUnselectedColorId(Color.BLACK);
+        mTabBubbleAnimator.addTabItem(titles[0], R.drawable.bottomnav_system, colors[0]);
+        mTabBubbleAnimator.addTabItem(titles[1], R.drawable.bottomnav_lockscreen, colors[1]);
+        mTabBubbleAnimator.addTabItem(titles[2], R.drawable.bottomnav_statusbar, colors[2]);
+        mTabBubbleAnimator.addTabItem(titles[3], R.drawable.bottomnav_hardware, colors[3]);
+        mTabBubbleAnimator.highLightTab(0);
     }
 
     class PagerAdapter extends FragmentPagerAdapter {
 
-        String titles[] = getTitles();
-        private Fragment frags[] = new Fragment[titles.length];
-
         PagerAdapter(FragmentManager fm) {
             super(fm);
-            frags[0] = new System();
-            frags[1] = new Lockscreen();
-            frags[2] = new Statusbar();
-            frags[3] = new Hardware();
+        mFragmentList.add(new System(titles[0], colors[0]));
+        mFragmentList.add(new Lockscreen(titles[1],colors[1]));
+        mFragmentList.add(new Statusbar(titles[2], colors[2]));
+        mFragmentList.add(new Hardware(titles[3], colors[3]));
         }
 
         @Override
         public Fragment getItem(int position) {
-            return frags[position];
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            return frags.length;
+            return mFragmentList.size();
         }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
-        }
-    }
-
-    private String[] getTitles() {
-        String titleString[];
-        titleString = new String[]{
-                getString(R.string.bottom_nav_system_title),
-                getString(R.string.bottom_nav_lockscreen_title),
-                getString(R.string.bottom_nav_statusbar_title),
-                getString(R.string.bottom_nav_hardware_title)};
-
-        return titleString;
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {

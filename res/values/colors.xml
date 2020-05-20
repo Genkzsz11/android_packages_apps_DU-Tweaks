@@ -74,5 +74,10 @@
 	<color name="dt_icon_manager_icon_tint">#9C27B0</color>	
 	<color name="dt_quicksettings_icon_tint">#D81B60</color>
 	<color name="dt_ticker_icon_tint">#00ACC1</color>
-	<color name="dt_traffic_icon_tint">#1E88E5</color>	
+	<color name="dt_traffic_icon_tint">#1E88E5</color>
+
+    <color name="system">@*android:color/accent_device_default_light</color>
+    <color name="lockscreen">@*android:color/accent_device_default_light</color>
+    <color name="statusbar">@*android:color/accent_device_default_light</color>
+    <color name="hardware">@*android:color/accent_device_default_light</color>	
 </resources>
