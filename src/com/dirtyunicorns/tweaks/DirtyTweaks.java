@@ -33,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.viewpager.widget.ViewPager;
+import android.graphics.Color;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -42,7 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 
-import com.dirtyunicorns.tweaks.tabs.TabBubbleAnimator;
+import com.dirtyunicorns.tweaks.customtab.TabBubbleAnimator;
 import com.google.android.material.tabs.TabLayout;
 
 import com.dirtyunicorns.tweaks.fragments.team.TeamActivity;
@@ -60,12 +61,10 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
     private MenuItem mMenuItem;
     private Context mContext;
-    private ViewPager mViewpager;
     private TabBubbleAnimator mTabBubbleAnimator;
     private TabLayout mTabLayout;
     private String[] titles = new String[]{"System", "Lockscreen", "Statusbar", "Hardware"};
     private int[] colors = new int[]{R.color.system, R.color.lockscreen, R.color.statusbar, R.color.hardware};
-    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,12 +74,13 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
 
         getActivity().setTitle(R.string.dirtytweaks_title);
         mTabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        mTabLayout.setViewPager(mViewpager);
         mTabBubbleAnimator = new TabBubbleAnimator(mTabLayout);
-        PagerAdapter.setAdapter(new PagerAdapter(getFragmentManager()));
-        mViewpager = (ViewPager) view.findViewById(R.id.viewpager);
-        mViewpager.addOnPageChangeListener(mTabBubbleAnimator);
-        oninit();
+        final ViewPager viewPager = view.findViewById(R.id.viewpager);
+        PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
+        viewPager.setAdapter(mPagerAdapter);
+        viewPager.addOnPageChangeListener(mTabBubbleAnimator);
+        mTabLayout.setupWithViewPager(viewPager);
+        onInit();
         return view;
     }
 
@@ -94,24 +94,42 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
     }
 
     class PagerAdapter extends FragmentPagerAdapter {
+        String titles[] = getTitles();
+        private Fragment frags[] = new Fragment[titles.length];
 
         PagerAdapter(FragmentManager fm) {
             super(fm);
-        mFragmentList.add(new System(titles[0], colors[0]));
-        mFragmentList.add(new Lockscreen(titles[1],colors[1]));
-        mFragmentList.add(new Statusbar(titles[2], colors[2]));
-        mFragmentList.add(new Hardware(titles[3], colors[3]));
+            frags[0] = new System();
+            frags[1] = new Lockscreen();
+            frags[2] = new Statusbar();
+            frags[3] = new Hardware();
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            return frags[position];
         }
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
+            return frags.length;
         }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
+        }
+    }
+
+    private String[] getTitles() {
+        String titleString[];
+        titleString = new String[]{
+                getString(R.string.bottom_nav_system_title),
+                getString(R.string.bottom_nav_lockscreen_title),
+                getString(R.string.bottom_nav_statusbar_title),
+                getString(R.string.bottom_nav_hardware_title)};
+
+        return titleString;
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {

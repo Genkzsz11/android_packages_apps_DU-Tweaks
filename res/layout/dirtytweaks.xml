@@ -31,9 +31,11 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:elevation="20dp"
+        android:minHeight="?actionBarSize"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        app:tabGravity="bottom"
+        android:layout_alignParentBottom="true"
+        app:tabGravity="fill"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed" />
 
