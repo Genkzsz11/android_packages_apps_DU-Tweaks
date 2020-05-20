@@ -55,6 +55,7 @@ public class Hardware extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.hardware);
+        setRetainInstance(true);
 
         Preference Buttons = findPreference(BUTTONS_CATEGORY);
         if (!getResources().getBoolean(R.bool.has_buttons)) {
@@ -80,25 +81,6 @@ public class Hardware extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setRetainInstance(true);
-        return inflater.inflate(R.layout.fragment_one, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        TextView textView = getView().findViewById(R.id.tab_title);
-        textView.setText(title);
-        textView.setTextColor(ContextCompat.getColor(getContext(), colorId));
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {

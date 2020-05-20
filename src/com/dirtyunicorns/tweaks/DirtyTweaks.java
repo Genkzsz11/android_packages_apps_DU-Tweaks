@@ -58,17 +58,12 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
     private Context mContext;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         mContext = getActivity();
         getActivity().setTitle(R.string.dirtytweaks_title);
-        View view = inflater.inflate(R.layout.dirtytweaks, container, false);
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        return view;
+        Intent intent = new Intent(mContext, MainActivity.class);
+        mContext.startActivity(intent);
     }
 
     @Override

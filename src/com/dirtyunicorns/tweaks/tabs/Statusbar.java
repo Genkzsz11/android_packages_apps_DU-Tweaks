@@ -59,6 +59,7 @@ public class Statusbar extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.statusbar);
+        setRetainInstance(true);
 
         Preference BatteryOptions = findPreference(BATTERY_CATEGORY);
         if (!getResources().getBoolean(R.bool.has_battery_options)) {
@@ -106,24 +107,6 @@ public class Statusbar extends SettingsPreferenceFragment
         super.onPause();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setRetainInstance(true);
-        return inflater.inflate(R.layout.fragment_one, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        TextView textView = getView().findViewById(R.id.tab_title);
-        textView.setText(title);
-        textView.setTextColor(ContextCompat.getColor(getContext(), colorId));
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
