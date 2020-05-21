@@ -72,21 +72,14 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         bubbleNavigationLinearView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
-                switch(view.getId()){
+                switch(view.getId()) {
                     case R.id.system:
-                         viewPager.setCurrentItem(position, 0);
-                    break;
                     case R.id.lockscreen:
-                         viewPager.setCurrentItem(position, 1);
-                    break;
                     case R.id.statusbar:
-                         viewPager.setCurrentItem(position, 2);
-                    break;
                     case R.id.hardware:
-                         viewPager.setCurrentItem(position, 3);
+                         viewPager.setCurrentItem(position, true);
                     break;
                    }
-                return true;
                }
            });
 
