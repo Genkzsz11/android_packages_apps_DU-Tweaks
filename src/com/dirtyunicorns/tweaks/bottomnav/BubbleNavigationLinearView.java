@@ -25,7 +25,7 @@ import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationChangeListener;
+import com.dirtyunicorns.tweaks.bottomnav.listener.BubbleNavigationChangeListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
