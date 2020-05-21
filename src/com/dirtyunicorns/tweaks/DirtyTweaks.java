@@ -131,6 +131,17 @@ public class DirtyTweaks extends SettingsPreferenceFragment implements
         }
     }
 
+    private String[] getTitles() {
+        String titleString[];
+        titleString = new String[]{
+                getString(R.string.bottom_nav_system_title),
+                getString(R.string.bottom_nav_lockscreen_title),
+                getString(R.string.bottom_nav_statusbar_title),
+                getString(R.string.bottom_nav_hardware_title)};
+
+        return titleString;
+    }
+
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
         return true;
