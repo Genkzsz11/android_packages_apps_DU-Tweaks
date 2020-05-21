@@ -28,15 +28,59 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/navigation"/>
+        android:layout_above="@+id/bottom_navigation_view_linear"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
+    <com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationLinearView
+        android:id="@+id/bottom_navigation_view_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="8dp"
         android:layout_gravity="bottom"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        style="@style/DtBottomNavStyle"
-        app:menu="@menu/main" />
+        android:padding="12dp">
 
+        <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
+            android:id="@+id/system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_active="true"
+            app:bt_colorActive="@color/red_active"
+            app:bt_colorInactive="@color/red_inactive"
+            app:bt_icon="@drawable/bottomnav_system"
+            app:bt_shape="@drawable/transition_background_drawable_system"
+            app:bt_title="@string/bottom_nav_system_title" />
+
+        <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
+            android:id="@+id/lockscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_badgeBackgroundColor="@color/green_active"
+            app:bt_colorActive="@color/blue_active"
+            app:bt_colorInactive="@color/blue_inactive"
+            app:bt_icon="@drawable/bottomnav_lockscreen"
+            app:bt_shape="@drawable/transition_background_drawable_lockscreen"
+            app:bt_title="@string/bottom_nav_lockscreen_title" />
+
+        <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
+            android:id="@+id/statusbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/blue_grey_active"
+            app:bt_colorInactive="@color/blue_grey_inactive"
+            app:bt_icon="@drawable/bottomnav_statusbar"
+            app:bt_shape="@drawable/transition_background_drawable_statusbar"
+            app:bt_title="@string/bottom_nav_statusbar_title" />
+
+        <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
+            android:id="@+id/hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/green_active"
+            app:bt_colorInactive="@color/green_inactive"
+            app:bt_icon="@drawable/bottomnav_hardware"
+            app:bt_shape="@drawable/transition_background_drawable_hardware"
+            app:bt_title="@string/bottom_nav_hardware_title" />
+    </com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationLinearView>
 </RelativeLayout>

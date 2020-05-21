@@ -74,5 +74,11 @@
 	<color name="dt_icon_manager_icon_tint">#9C27B0</color>	
 	<color name="dt_quicksettings_icon_tint">#D81B60</color>
 	<color name="dt_ticker_icon_tint">#00ACC1</color>
-	<color name="dt_traffic_icon_tint">#1E88E5</color>	
+	<color name="dt_traffic_icon_tint">#1E88E5</color>
+
+    <color name="default_inactive_shape_color">#e5e5e5</color>
+    <color name="default_inactive_color">#212121</color>
+    <color name="default_shape_inactive_color">#888888</color>
+    <color name="default_badge_background_color">#f44336</color>
+    <color name="default_badge_text_color">#ffffff</color>
 </resources>
