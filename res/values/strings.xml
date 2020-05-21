@@ -1023,6 +1023,7 @@
     <string name="qs_tint_off">Tint Off</string>
     <string name="qs_tint_random">Random Color</string>
     <string name="qs_tint_accent">Accent Color</string>
+    <string name="qs_disco_mode">Qs Disco Mode</string>
     <string name="qs_panel_color_title">QS Panel color</string>
     <string name="qs_bg_wall_title">Use Wallpaper colors</string>
     <string name="qs_bg_wall_summary">Set QS background color from Wallpaper</string>
