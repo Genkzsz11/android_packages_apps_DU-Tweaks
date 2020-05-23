@@ -18,7 +18,7 @@ package com.dirtyunicorns.tweaks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,7 +57,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
 
         getActivity().setTitle(R.string.dirtytweaks_title);
 
-        view.setTypeface(view.getTypeface(), Typeface.BOLD);
+        bubbleNavigationConstraintView.setTypeface(Typeface.DEFAULT_BOLD);
 
         final BubbleNavigationConstraintView bubbleNavigationConstraintView =  (BubbleNavigationConstraintView) view.findViewById(R.id.bottom_navigation_view_constraint);
         final ViewPager viewPager = view.findViewById(R.id.viewpager);
