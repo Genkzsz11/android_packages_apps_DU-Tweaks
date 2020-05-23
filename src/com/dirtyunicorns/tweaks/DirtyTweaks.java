@@ -60,6 +60,7 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
         bubbleNavigationConstraintView.setTypeface(Typeface.DEFAULT_BOLD);
 
         final BubbleNavigationConstraintView bubbleNavigationConstraintView =  (BubbleNavigationConstraintView) view.findViewById(R.id.bottom_navigation_view_constraint);
+        bubbleNavigationConstraintView.setTypeface(Typeface.DEFAULT_BOLD);
         final ViewPager viewPager = view.findViewById(R.id.viewpager);
         PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
