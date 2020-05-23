@@ -43,11 +43,12 @@
             android:layout_height="wrap_content"
             app:corvus_active="true"
             app:corvus_padding="12dp"
-            app:corvus_titlePadding="10dp"
+            app:corvus_titlePadding="4dp"
             app:corvus_colorActive="@color/green_active"
             app:corvus_colorInactive="@color/green_inactive"
             app:corvus_icon="@drawable/bottomnav_system"
             app:corvus_shape="@drawable/transition_background_drawable_system"
+            android:textStyle="bold"
             app:corvus_title="@string/bottom_nav_system_title" />
 
         <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
@@ -55,23 +56,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:corvus_padding="12dp"
-            app:corvus_titlePadding="10dp"
+            app:corvus_titlePadding="4dp"
             app:corvus_colorActive="@color/red_active"
             app:corvus_colorInactive="@color/red_inactive"
             app:corvus_icon="@drawable/bottomnav_lockscreen"
             app:corvus_shape="@drawable/transition_background_drawable_lockscreen"
+            android:textStyle="bold"
             app:corvus_title="@string/bottom_nav_lockscreen_title" />
 
         <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
             android:id="@+id/statusbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:corvus_padding="12dp"
-            app:corvus_titlePadding="10dp"
+            app:corvus_padding="14dp"
+            app:corvus_titlePadding="4dp"
             app:corvus_colorActive="@color/blue_active"
             app:corvus_colorInactive="@color/blue_inactive"
             app:corvus_icon="@drawable/bottomnav_statusbar"
             app:corvus_shape="@drawable/transition_background_drawable_statusbar"
+            android:textStyle="bold"
             app:corvus_title="@string/bottom_nav_statusbar_title" />
 
         <com.dirtyunicorns.tweaks.bottomnav.BubbleToggleView
@@ -79,11 +82,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:corvus_padding="12dp"
-            app:corvus_titlePadding="10dp"
+            app:corvus_titlePadding="4dp"
             app:corvus_colorActive="@color/amber_active"
             app:corvus_colorInactive="@color/amber_inactive"
             app:corvus_icon="@drawable/bottomnav_hardware"
             app:corvus_shape="@drawable/transition_background_drawable_hardware"
+            android:textStyle="bold"
             app:corvus_title="@string/bottom_nav_hardware_title" />
     </com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationConstraintView>
 </RelativeLayout>
