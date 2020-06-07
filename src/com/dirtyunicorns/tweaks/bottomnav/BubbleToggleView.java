@@ -373,7 +373,9 @@ public class BubbleToggleView extends RelativeLayout {
                 titleView.setWidth((int) (measuredTitleWidth * value));
                 //end of animation
                 if (value >= 1.0f) {
-                    //do something
+                    if (titleView.getVisibility() == GONE) {
+                        titleView.setVisibility(VISIBLE);
+                    }
                 }
             }
         });

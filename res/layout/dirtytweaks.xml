@@ -19,12 +19,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation_view_linear"/>
-
     <com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationConstraintView
         android:id="@+id/bottom_navigation_view_constraint"
         android:layout_width="match_parent"
@@ -86,4 +80,10 @@
             app:corvus_shape="@drawable/transition_background_drawable_hardware"
             app:corvus_title="@string/bottom_nav_hardware_title" />
     </com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationConstraintView>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="380dp"/>
 </RelativeLayout>
