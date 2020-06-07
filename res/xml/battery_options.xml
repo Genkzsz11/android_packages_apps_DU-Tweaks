@@ -20,7 +20,7 @@
 
     <com.dirtyunicorns.support.preferences.SystemSettingMasterSwitchPreference
         android:key="battery_light_enabled"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.BatteryLightSettings"
+        android:fragment="com.dirtyunicorns.tweaks.fragments.statusbar.BatteryLightSettings"
         android:title="@string/battery_light_settings"
         android:summary="@string/battery_light_settings_summary"
         android:defaultValue="true" />
@@ -29,13 +29,13 @@
         android:key="aggressive_battery"
         android:title="@string/aggressive_battery_title"
         android:summary="@string/aggressive_battery_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.AggressiveBattery"/>
+        android:fragment="com.dirtyunicorns.tweaks.fragments.statusbar.AggressiveBattery"/>
 
     <Preference
         android:key="batterybar_settings"
         android:title="@string/battery_bar_title"
         android:summary="@string/battery_bar_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.BatteryBar"/>
+        android:fragment="com.dirtyunicorns.tweaks.fragments.statusbar.BatteryBar"/>
 
     <PreferenceCategory
         android:title="@string/battery_style_category" >

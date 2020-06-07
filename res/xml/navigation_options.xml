@@ -81,7 +81,7 @@
             android:title="@string/button_backlight_title"
             android:summary="@string/button_backlight_summary"
             android:persistent="false"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.ButtonBrightness" />
+            android:fragment="com.dirtyunicorns.tweaks.fragments.hardware.ButtonBrightness" />
     </PreferenceCategory>
 
     <PreferenceCategory

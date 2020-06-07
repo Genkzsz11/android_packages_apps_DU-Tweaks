@@ -17,62 +17,71 @@
 package com.dirtyunicorns.tweaks.tabs;
 
 import android.os.Bundle;
-import android.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.card.MaterialCardView;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 
-import com.android.internal.util.du.Utils;
+import com.dirtyunicorns.tweaks.fragments.lockscreen.LockscreenItems;
+import com.dirtyunicorns.tweaks.fragments.lockscreen.FingerprintPrefs;
 
-public class Lockscreen extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+public class Lockscreen extends Fragment implements View.OnClickListener {
 
-    private static final String FINGERPRINT_PREFS_CATEGORY = "fingerprint_prefs_category";
-    private static final String LOCKSCREEN_ITEMS_CATEGORY = "lockscreen_items_category";
+    GridLayout mMainGrid;
+
+    MaterialCardView mLockscreenItems;
+    MaterialCardView mFingerprintPrefs;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.lockscreen);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.lockscreen, container, false);
+        mMainGrid = view.findViewById(R.id.lockscreen_grid);
+        return view;
+    }
 
-        Preference LockscreenItems = findPreference(LOCKSCREEN_ITEMS_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_lockscreen_items)) {
-            getPreferenceScreen().removePreference(LockscreenItems);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mLockscreenItems = (MaterialCardView) view.findViewById(R.id.lockscreen_items);
+        mLockscreenItems.setOnClickListener(this);
+
+        mFingerprintPrefs = (MaterialCardView) view.findViewById(R.id.fingerprintprefs);
+        mFingerprintPrefs.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.lockscreen_items:
+                LockscreenItems lockscreen = new LockscreenItems();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction.replace(this.getId(), lockscreen);
+                transaction.commit();
+                break;
+            case R.id.fingerprintprefs:
+                FingerprintPrefs finger = new FingerprintPrefs();
+                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
+                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction1.replace(this.getId(), finger);
+                transaction1.commit();
+                break;
         }
-
-        Preference FingerprintPrefs = findPreference(FINGERPRINT_PREFS_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_fingerprint_prefs)) {
-            getPreferenceScreen().removePreference(FingerprintPrefs);
-        } else {
-            if (!Utils.hasFingerprintSupport(getContext())) {
-                getPreferenceScreen().removePreference(FingerprintPrefs);
-            }
-        }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        return false;
-    }
-
-
-    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
     }

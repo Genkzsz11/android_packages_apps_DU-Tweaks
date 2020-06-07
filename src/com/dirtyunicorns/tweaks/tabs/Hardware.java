@@ -17,62 +17,82 @@
 package com.dirtyunicorns.tweaks.tabs;
 
 import android.os.Bundle;
-import android.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceFragment;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.card.MaterialCardView;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.internal.logging.nano.MetricsProto;
 
-public class Hardware extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+import com.dirtyunicorns.tweaks.fragments.hardware.Buttons;
+import com.dirtyunicorns.tweaks.fragments.hardware.PowerMenu;
+import com.dirtyunicorns.tweaks.fragments.hardware.NavigationOptions;
 
-    private static final String BUTTONS_CATEGORY = "buttons_category";
-    private static final String NAVIGATION_CATEGORY = "navigation_category";
-    private static final String POWERMENU_CATEGORY = "powermenu_category";
+public class Hardware extends Fragment implements View.OnClickListener {
+
+    GridLayout mMainGrid;
+
+    MaterialCardView mButtons;
+    MaterialCardView mPowerMenu;
+    MaterialCardView mNavigationOptions;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.hardware);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.hardware, container, false);
+        mMainGrid = view.findViewById(R.id.hardware_grid);
+        return view;
+    }
 
-        Preference Buttons = findPreference(BUTTONS_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_buttons)) {
-            getPreferenceScreen().removePreference(Buttons);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mButtons = (MaterialCardView) view.findViewById(R.id.buttons);
+        mButtons.setOnClickListener(this);
+
+        mPowerMenu = (MaterialCardView) view.findViewById(R.id.powermenu);
+        mPowerMenu.setOnClickListener(this);
+
+        mNavigationOptions = (MaterialCardView) view.findViewById(R.id.navigation_options);
+        mNavigationOptions.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttons:
+                Buttons buttons = new Buttons();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction.replace(this.getId(), buttons);
+                transaction.commit();
+                break;
+            case R.id.powermenu:
+                PowerMenu power = new PowerMenu();
+                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
+                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction1.replace(this.getId(), power);
+                transaction1.commit();
+                break;
+            case R.id.navigation_options:
+                NavigationOptions navbar = new NavigationOptions();
+                FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
+                transaction2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction2.replace(this.getId(), navbar);
+                transaction2.commit();
+                break;
         }
-
-        Preference Navigation = findPreference(NAVIGATION_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_navigation)) {
-            getPreferenceScreen().removePreference(Navigation);
-        }
-
-        Preference PowerMenu = findPreference(POWERMENU_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_powermenu)) {
-            getPreferenceScreen().removePreference(PowerMenu);
-        }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        return false;
-    }
-
-
-    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
     }

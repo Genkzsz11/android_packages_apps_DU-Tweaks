@@ -29,7 +29,7 @@
         android:key="lockscreen_style"
         android:title="@string/lockscreen_style_title"
         android:summary="@string/lockscreen_style_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.LockscreenStyle" />
+        android:fragment="com.dirtyunicorns.tweaks.fragments.lockscreen.LockscreenStyle" />
 
     <com.dirtyunicorns.support.preferences.SystemSettingListPreference
         android:key="lockscreen_charging_animation_style"
@@ -50,7 +50,7 @@
             android:key="fod_icon_picker_category"
             android:title="@string/fod_icon_picker_title"
             android:summary="@string/fod_icon_picker_summary"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.FODIconPickerFragment" />
+            android:fragment="com.dirtyunicorns.tweaks.fragments.lockscreen.FODIconPickerFragment" />
 
         <!-- FOD recognizing animation -->
         <com.dirtyunicorns.support.preferences.SystemSettingSwitchPreference
@@ -124,7 +124,7 @@
         <com.dirtyunicorns.support.preferences.SecureSettingMasterSwitchPreference
             android:key="lockscreen_visualizer_enabled"
             android:title="@string/lockscreen_visualizer_enable"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.Visualizer"
+            android:fragment="com.dirtyunicorns.tweaks.fragments.lockscreen.Visualizer"
             android:summary="@string/lockscreen_visualizer_enable_summary"
             android:defaultValue="false" />
 

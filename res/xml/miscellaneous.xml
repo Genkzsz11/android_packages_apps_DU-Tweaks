@@ -22,19 +22,19 @@
         android:key="rounded_corners"
         android:title="@string/corners_title"
         android:summary="@string/corners_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.RoundedCornersSettings" />
+        android:fragment="com.dirtyunicorns.tweaks.fragments.system.RoundedCornersSettings" />
 
     <Preference
         android:key="cutout_settings"
         android:title="@string/cutout_main"
         android:summary="@string/cutout_main_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.CutoutFragment"/>
+        android:fragment="com.dirtyunicorns.tweaks.fragments.system.CutoutFragment"/>
 
     <Preference
         android:key="animations_category"
         android:title="@string/animation_settings_title"
         android:summary="@string/animation_settings_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.AnimationSettings" />
+        android:fragment="com.dirtyunicorns.tweaks.fragments.system.AnimationSettings" />
 
     <com.dirtyunicorns.support.preferences.SystemSettingListPreference
         android:key="screenshot_type"
@@ -64,7 +64,7 @@
 
         <com.dirtyunicorns.support.preferences.SystemSettingMasterSwitchPreference
             android:key="gaming_mode_enabled"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.GamingMode"
+            android:fragment="com.dirtyunicorns.tweaks.fragments.system.GamingMode"
             android:title="@string/gaming_mode_title"
             android:summary="@string/gaming_mode_summary"
             android:defaultValue="false" />
@@ -122,13 +122,13 @@
             android:key="wakelock_blocker"
             android:title="@string/wakelock_blocker_title"
             android:summary="@string/wakelock_blocker_summary"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.blocker.WakeLockBlocker"/>
+            android:fragment="com.dirtyunicorns.tweaks.fragments.system.blocker.WakeLockBlocker"/>
 
         <Preference
            android:key="alarm_blocker"
            android:title="@string/alarm_blocker_title"
            android:summary="@string/alarm_blocker_summary"
-           android:fragment="com.dirtyunicorns.tweaks.fragments.blocker.AlarmBlocker"/>
+           android:fragment="com.dirtyunicorns.tweaks.fragments.system.blocker.AlarmBlocker"/>
 
     </PreferenceCategory>
 

@@ -20,7 +20,7 @@
 
         <com.dirtyunicorns.support.preferences.GlobalSettingMasterSwitchPreference
             android:key="heads_up_notifications_enabled"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.HeadsUpOptions"
+            android:fragment="com.dirtyunicorns.tweaks.fragments.system.HeadsUpOptions"
             android:title="@string/heads_up_notifications"
             android:summary="@string/heads_up_notifications_summary"
             android:defaultValue="true" />
@@ -62,7 +62,7 @@
         <com.dirtyunicorns.support.preferences.SystemSettingMasterSwitchPreference
             android:key="ambient_notification_light"
             android:title="@string/pulse_ambient_light_title"
-            android:fragment="com.dirtyunicorns.tweaks.fragments.PulseNotificationLights"
+            android:fragment="com.dirtyunicorns.tweaks.fragments.system.PulseNotificationLights"
             android:summary="@string/pulse_ambient_light_summary"
             android:defaultValue="false" />
 

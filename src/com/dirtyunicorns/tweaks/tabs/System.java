@@ -17,61 +17,69 @@
 package com.dirtyunicorns.tweaks.tabs;
 
 import android.os.Bundle;
-import android.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceFragment;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.card.MaterialCardView;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.internal.logging.nano.MetricsProto;
 
-public class System extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+import com.dirtyunicorns.tweaks.fragments.system.Notifications;
+import com.dirtyunicorns.tweaks.fragments.system.Miscellaneous;
 
+public class System extends Fragment implements View.OnClickListener {
 
-    private static final String CORVUS_PARTS_CATEGORY = "corvus_parts_category";
-    private static final String NOTIFICATIONS_CATEGORY = "notifications_category";
-    private static final String MISC_CATEGORY = "miscellaneous_category";
+    GridLayout mMainGrid;
+    MaterialCardView mNotifications;
+    MaterialCardView mMiscellaneous;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.system);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.system, container, false);
+        mMainGrid = view.findViewById(R.id.system_grid);
+        return view;
+    }
 
-        Preference CorvusParts = findPreference(CORVUS_PARTS_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_corvus_parts_available)) {
-            getPreferenceScreen().removePreference(CorvusParts);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mNotifications = (MaterialCardView) view.findViewById(R.id.notif);
+        mNotifications.setOnClickListener(this);
+
+        mMiscellaneous = (MaterialCardView) view.findViewById(R.id.miscellaneous);
+        mMiscellaneous.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.notif:
+                Notifications notif = new Notifications();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction.replace(this.getId(), notif);
+                transaction.commit();
+                break;
+            case R.id.miscellaneous:
+                Miscellaneous misc = new Miscellaneous();
+                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
+                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                transaction1.replace(this.getId(), misc);
+                transaction1.commit();
+                break;
         }
-
-        Preference Notifications = findPreference(NOTIFICATIONS_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_notifications)) {
-            getPreferenceScreen().removePreference(Notifications);
-        }
-
-        Preference MiscOptions = findPreference("miscellaneous_category");
-        if (!getResources().getBoolean(R.bool.has_misc_options)) {
-            getPreferenceScreen().removePreference(MiscOptions);
-        }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        return false;
-    }
-
-    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
     }
