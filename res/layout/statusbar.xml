@@ -1,359 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dirtyunicorns.tweaks.tabs.Statusbar"
-    android:orientation="vertical">
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:fillViewport="true">
 
-    <GridLayout
-        android:id="@+id/statusbar_grid"
+    <FrameLayout
+        android:id="@+id/fragment_statusbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:layout_marginTop="4dp"
-        android:alignmentMode="alignMargins"
-        android:columnCount="2"
-        android:columnOrderPreserved="false"
-        android:padding="2dp"
-        android:rowCount="4">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    </FrameLayout>
 
-         <!--Layout Battery Options-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/battery_options"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
-
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_battery_options" />
+                    android:paddingTop="24dp"
+                    android:paddingRight="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingBottom="24dp"
+                    android:weightSum="2"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/battery_options_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/battery_options"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_battery_options"
+                        app:title="@string/battery_options_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/battery_options_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/carrier_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_carrier_label"
+                        app:title="@string/carrier_label_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
 
-         <!--Layout Carrier label-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/carrier_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/clock_options"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_clock_options"
+                        app:title="@string/clock_options_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/icon_manager"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_icon_manager"
+                        app:title="@string/icon_manager_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_carrier_label" />
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/quick_settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_quicksettings"
+                        app:title="@string/quicksettings_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/carrier_label_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/traffic_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_traffic"
+                        app:title="@string/traffic_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/carrier_label_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-         <!--Layout Clock options-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/clock_options"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_clock_options" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/clock_options_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/clock_options_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-         <!--Layout Icon manager-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/icon_manager"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_icon_manager" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/icon_manager_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/icon_manager_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-         <!--Layout Quick settings-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/quick_settings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_quicksettings" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/quicksettings_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/quicksettings_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-         <!--Layout Traffic indicator-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/traffic_indicator"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_traffic" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/traffic_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/traffic_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-         <!--Layout Ticker-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/ticker"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginBottom="48dp"
-            app:rippleColor="?android:attr/colorAccent"
-            app:cardCornerRadius="8dp"
-            android:clickable="true"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/dt_ticker" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ticker_title"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ticker_summary"
-                    android:textAlignment="center"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </GridLayout>
-</LinearLayout>
+                    <com.dirtyunicorns.tweaks.tabs.MenuViews
+                        android:id="@+id/ticker"
+                        android:layout_width="match_parent"
+                        android:layout_height="112dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        app:icon="@drawable/dt_ticker"
+                        app:title="@string/ticker_title">
+                    </com.dirtyunicorns.tweaks.tabs.MenuViews>
+          </LinearLayout>
+     </RelativeLayout>
+</ScrollView>

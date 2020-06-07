@@ -23,4 +23,10 @@
             <enum name="packed" value="2" />
         </attr>
     </declare-styleable>
+
+    <!-- Menu Views Attributes -->
+    <declare-styleable name="MenuViews">
+        <attr name="title" format="string"/>
+        <attr name="icon" format="reference"/>
+    </declare-styleable>
 </resources>

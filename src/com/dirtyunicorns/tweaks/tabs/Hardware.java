@@ -23,77 +23,117 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.card.MaterialCardView;
-import android.widget.GridLayout;
-import android.widget.GridView;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.dirtyunicorns.tweaks.fragments.hardware.Buttons;
 import com.dirtyunicorns.tweaks.fragments.hardware.PowerMenu;
 import com.dirtyunicorns.tweaks.fragments.hardware.NavigationOptions;
 
-public class Hardware extends Fragment implements View.OnClickListener {
+public class Hardware extends SettingsPreferenceFragment implements View.OnClickListener, Preference.OnPreferenceChangeListener {
 
-    GridLayout mMainGrid;
+    private static final String BUTTONS_CATEGORY = "buttons_category";
+    private static final String NAVIGATION_CATEGORY = "navigation_category";
+    private static final String POWERMENU_CATEGORY = "powermenu_category";
 
-    MaterialCardView mButtons;
-    MaterialCardView mPowerMenu;
-    MaterialCardView mNavigationOptions;
+    private MenuViews buttons, powermenu, navigation;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private Fragment mFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.hardware, container, false);
-        mMainGrid = view.findViewById(R.id.hardware_grid);
+        mFragmentManager = getActivity().getSupportFragmentManager();
+        initViews(view);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
-        mButtons = (MaterialCardView) view.findViewById(R.id.buttons);
-        mButtons.setOnClickListener(this);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        mPowerMenu = (MaterialCardView) view.findViewById(R.id.powermenu);
-        mPowerMenu.setOnClickListener(this);
+    }
 
-        mNavigationOptions = (MaterialCardView) view.findViewById(R.id.navigation_options);
-        mNavigationOptions.setOnClickListener(this);
+    private void initViews(final View view) {
+        buttons = (MenuViews) view.findViewById(R.id.buttons);
+        powermenu = (MenuViews) view.findViewById(R.id.powermenu);
+        navigation = (MenuViews) view.findViewById(R.id.navigation_options);
+        initClick();
+    }
+
+    private void initClick() {
+        buttons.setOnClickListener(this);
+        powermenu.setOnClickListener(this);
+        navigation.setOnClickListener(this);
+    }
+
+    private void loadFragment(String tag, boolean addToStack, Bundle bundle, Fragment setFragment) {
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragment = setFragment;
+
+        if (addToStack) {
+          if (bundle != null)
+            mFragment.setArguments(bundle);
+            mFragmentTransaction.replace(R.id.fragment_hardware, mFragment, tag);
+            mFragmentTransaction.addToBackStack(tag).commit();
+
+        } else {
+          if (bundle != null)
+              mFragment.setArguments(bundle);
+              mFragmentTransaction.replace(R.id.fragment_hardware, mFragment, tag);
+              mFragmentTransaction.commit();
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttons:
-                Buttons buttons = new Buttons();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.replace(this.getId(), buttons);
-                transaction.commit();
+                loadFragment (BUTTONS_CATEGORY, true, null, new Buttons());
                 break;
             case R.id.powermenu:
-                PowerMenu power = new PowerMenu();
-                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
-                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction1.replace(this.getId(), power);
-                transaction1.commit();
+                loadFragment (NAVIGATION_CATEGORY, true, null, new PowerMenu());
                 break;
             case R.id.navigation_options:
-                NavigationOptions navbar = new NavigationOptions();
-                FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
-                transaction2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction2.replace(this.getId(), navbar);
-                transaction2.commit();
+                loadFragment (POWERMENU_CATEGORY, true, null, new NavigationOptions());
                 break;
         }
     }
 
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
+        return true;
     }
 }

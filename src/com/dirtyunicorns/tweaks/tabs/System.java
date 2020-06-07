@@ -23,9 +23,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.card.MaterialCardView;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -36,51 +33,81 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.dirtyunicorns.tweaks.fragments.system.Notifications;
 import com.dirtyunicorns.tweaks.fragments.system.Miscellaneous;
 
-public class System extends Fragment implements View.OnClickListener {
+public class System extends SettingsPreferenceFragment implements View.OnClickListener, Preference.OnPreferenceChangeListener {
 
-    GridLayout mMainGrid;
-    MaterialCardView mNotifications;
-    MaterialCardView mMiscellaneous;
+    private static final String NOTIFICATIONS_CATEGORY = "notifications_category";
+    private static final String MISC_CATEGORY = "miscellaneous_category";
+
+    private MenuViews notif, miscellaneous;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private Fragment mFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.system, container, false);
-        mMainGrid = view.findViewById(R.id.system_grid);
+        mFragmentManager = getActivity().getSupportFragmentManager();
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void initViews(final View view) {
+        notif = (MenuViews) view.findViewById(R.id.notif);
+        miscellaneous = (MenuViews) view.findViewById(R.id.miscellaneous);
+        initClick();
+    }
 
-        mNotifications = (MaterialCardView) view.findViewById(R.id.notif);
-        mNotifications.setOnClickListener(this);
+    private void initClick() {
+        notif.setOnClickListener(this);
+        miscellaneous.setOnClickListener(this);
+    }
 
-        mMiscellaneous = (MaterialCardView) view.findViewById(R.id.miscellaneous);
-        mMiscellaneous.setOnClickListener(this);
+    private void loadFragment(String tag, boolean addToStack, Bundle bundle, Fragment setFragment) {
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragment = setFragment;
+
+        if (addToStack) {
+          if (bundle != null)
+            mFragment.setArguments(bundle);
+            mFragmentTransaction.replace(R.id.fragment_hardware, mFragment, tag);
+            mFragmentTransaction.addToBackStack(tag).commit();
+
+        } else {
+          if (bundle != null)
+              mFragment.setArguments(bundle);
+              mFragmentTransaction.replace(R.id.fragment_hardware, mFragment, tag);
+              mFragmentTransaction.commit();
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.notif:
-                Notifications notif = new Notifications();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.replace(this.getId(), notif);
-                transaction.commit();
+                loadFragment (NOTIFICATIONS_CATEGORY, true, null, new Notifications());
                 break;
             case R.id.miscellaneous:
-                Miscellaneous misc = new Miscellaneous();
-                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
-                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction1.replace(this.getId(), misc);
-                transaction1.commit();
+                loadFragment (MISC_CATEGORY, true, null, new Miscellaneous());
                 break;
         }
     }
 
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
+        return true;
     }
 }

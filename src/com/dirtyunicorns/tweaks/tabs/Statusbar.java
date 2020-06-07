@@ -22,10 +22,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
-
-import com.google.android.material.card.MaterialCardView;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -41,107 +37,124 @@ import com.dirtyunicorns.tweaks.fragments.statusbar.QuickSettings;
 import com.dirtyunicorns.tweaks.fragments.statusbar.TrafficIndicators;
 import com.dirtyunicorns.tweaks.fragments.statusbar.Ticker;
 
-public class Statusbar extends Fragment implements View.OnClickListener {
+public class Statusbar extends SettingsPreferenceFragment implements View.OnClickListener, Preference.OnPreferenceChangeListener {
 
-    GridLayout mMainGrid;
+    private static final String BATTERY_CATEGORY = "battery_options_category";
+    private static final String CARRIER_LABEL_CATEGORY = "carrier_label_category";
+    private static final String CLOCK_CATEGORY = "clock_options_category";
+    private static final String ICON_MANAGER_CATEGORY = "icon_manager_title";
+    private static final String QUICK_SETTINGS_CATEGORY = "quick_settings_category";
+    private static final String TRAFFIC_CATEGORY = "traffic_category";
+    private static final String TICKER_CATEGORY = "ticker_category";
 
-    MaterialCardView mBatteryOptions;
-    MaterialCardView mCarrierLabel;
-    MaterialCardView mClockOptions;
-    MaterialCardView mIconManager;
-    MaterialCardView mQuickSettings;
-    MaterialCardView mTraffic;
-    MaterialCardView mTicker;
+    private MenuViews battery, carrierlabel, clock, icon, qs, nettraff, ticker;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private Fragment mFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.statusbar, container, false);
-        mMainGrid = view.findViewById(R.id.statusbar_grid);
+        mFragmentManager = getActivity().getSupportFragmentManager();
+        initViews(view);
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
-        mBatteryOptions = (MaterialCardView) view.findViewById(R.id.battery_options);
-        mBatteryOptions.setOnClickListener(this);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        mCarrierLabel = (MaterialCardView) view.findViewById(R.id.carrier_label);
-        mCarrierLabel.setOnClickListener(this);
+    }
 
-        mClockOptions = (MaterialCardView) view.findViewById(R.id.clock_options);
-        mClockOptions.setOnClickListener(this);
+    private void initViews(final View view) {
+        battery = (MenuViews) view.findViewById(R.id.battery_options);
+        carrierlabel = (MenuViews) view.findViewById(R.id.carrier_label);
+        clock = (MenuViews) view.findViewById(R.id.clock_options);
+        icon = (MenuViews) view.findViewById(R.id.icon_manager);
+        qs = (MenuViews) view.findViewById(R.id.quick_settings);
+        nettraff = (MenuViews) view.findViewById(R.id.traffic_indicator);
+        ticker = (MenuViews) view.findViewById(R.id.ticker);
+        initClick();
+    }
 
-        mIconManager = (MaterialCardView) view.findViewById(R.id.icon_manager);
-        mIconManager.setOnClickListener(this);
+    private void initClick() {
+        battery.setOnClickListener(this);
+        carrierlabel.setOnClickListener(this);
+        clock.setOnClickListener(this);
+        icon.setOnClickListener(this);
+        qs.setOnClickListener(this);
+        nettraff.setOnClickListener(this);
+        ticker.setOnClickListener(this);
+    }
 
-        mQuickSettings = (MaterialCardView) view.findViewById(R.id.quick_settings);
-        mQuickSettings.setOnClickListener(this);
+    private void loadFragment(String tag, boolean addToStack, Bundle bundle, Fragment setFragment) {
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragment = setFragment;
 
-        mTraffic = (MaterialCardView) view.findViewById(R.id.traffic_indicator);
-        mTraffic.setOnClickListener(this);
+        if (addToStack) {
+          if (bundle != null)
+            mFragment.setArguments(bundle);
+            mFragmentTransaction.replace(R.id.fragment_statusbar, mFragment, tag);
+            mFragmentTransaction.addToBackStack(tag).commit();
 
-        mTicker = (MaterialCardView) view.findViewById(R.id.ticker);
-        mTicker.setOnClickListener(this);
+        } else {
+          if (bundle != null)
+              mFragment.setArguments(bundle);
+              mFragmentTransaction.replace(R.id.fragment_statusbar, mFragment, tag);
+              mFragmentTransaction.commit();
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.battery_options:
-                BatteryOptions battery = new BatteryOptions();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.replace(this.getId(), battery);
-                transaction.commit();
+                loadFragment (BATTERY_CATEGORY, true, null, new BatteryOptions());
                 break;
             case R.id.carrier_label:
-                CarrierLabel carrier = new CarrierLabel();
-                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
-                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction1.replace(this.getId(), carrier);
-                transaction1.commit();
+                loadFragment (CARRIER_LABEL_CATEGORY, true, null, new CarrierLabel());
                 break;
             case R.id.clock_options:
-                ClockOptions clock = new ClockOptions();
-                FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
-                transaction2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction2.replace(this.getId(), clock);
-                transaction2.commit();
+                loadFragment (CLOCK_CATEGORY, true, null, new ClockOptions());
                 break;
             case R.id.icon_manager:
-                IconManager iconmanager = new IconManager();
-                FragmentTransaction transaction3 = getFragmentManager().beginTransaction();
-                transaction3.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction3.replace(this.getId(), iconmanager);
-                transaction3.commit();
+                loadFragment (ICON_MANAGER_CATEGORY, true, null, new IconManager());
                 break;
             case R.id.quick_settings:
-                QuickSettings qs = new QuickSettings();
-                FragmentTransaction transaction4 = getFragmentManager().beginTransaction();
-                transaction4.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction4.replace(this.getId(), qs);
-                transaction4.commit();
+                loadFragment (QUICK_SETTINGS_CATEGORY, true, null, new QuickSettings());
                 break;
             case R.id.traffic_indicator:
-                TrafficIndicators traffic = new TrafficIndicators();
-                FragmentTransaction transaction5 = getFragmentManager().beginTransaction();
-                transaction5.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction5.replace(this.getId(), traffic);
-                transaction5.commit();
+                loadFragment (TRAFFIC_CATEGORY, true, null, new TrafficIndicators());
                 break;
             case R.id.ticker:
-                Ticker ticker = new Ticker();
-                FragmentTransaction transaction6 = getFragmentManager().beginTransaction();
-                transaction6.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction6.replace(this.getId(), ticker);
-                transaction6.commit();
+                loadFragment (TICKER_CATEGORY, true, null, new Ticker());
                 break;
         }
     }
 
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
+        return true;
     }
 }

@@ -36,53 +36,64 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.dirtyunicorns.tweaks.fragments.lockscreen.LockscreenItems;
 import com.dirtyunicorns.tweaks.fragments.lockscreen.FingerprintPrefs;
 
-public class Lockscreen extends Fragment implements View.OnClickListener {
+public class Lockscreen extends SettingsPreferenceFragment implements View.OnClickListener, Preference.OnPreferenceChangeListener {
 
-    GridLayout mMainGrid;
+    private static final String LOCKSCREEN_ITEMS_CATEGORY = "lockscreen_items_category";
+    private static final String FINGERPRINT_PREFS_CATEGORY = "fingerprint_prefs_category";
 
-    MaterialCardView mLockscreenItems;
-    MaterialCardView mFingerprintPrefs;
+    private MenuViews notif, miscellaneous;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private Fragment mFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lockscreen, container, false);
-        mMainGrid = view.findViewById(R.id.lockscreen_grid);
+        mFragmentManager = getActivity().getSupportFragmentManager();
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mLockscreenItems = (MaterialCardView) view.findViewById(R.id.lockscreen_items);
-        mLockscreenItems.setOnClickListener(this);
-
-        mFingerprintPrefs = (MaterialCardView) view.findViewById(R.id.fingerprintprefs);
-        mFingerprintPrefs.setOnClickListener(this);
-
+    private void initViews(final View view) {
+        lockitem = (MenuViews) view.findViewById(R.id.lockscreen_items);
+        fp = (MenuViews) view.findViewById(R.id.fingerprintprefs);
+        initClick();
     }
+
+    private void initClick() {
+        lockitem.setOnClickListener(this);
+        fp.setOnClickListener(this);
+    }
+
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.lockscreen_items:
-                LockscreenItems lockscreen = new LockscreenItems();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.replace(this.getId(), lockscreen);
-                transaction.commit();
+                loadFragment (LOCKSCREEN_ITEMS_CATEGORY, true, null, new LockscreenItems());
                 break;
             case R.id.fingerprintprefs:
-                FingerprintPrefs finger = new FingerprintPrefs();
-                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
-                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction1.replace(this.getId(), finger);
-                transaction1.commit();
+                loadFragment (FINGERPRINT_PREFS_CATEGORY, true, null, new FingerprintPrefs());
                 break;
         }
     }
 
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
+        return true;
     }
 }
