@@ -22,45 +22,31 @@ import android.util.AttributeSet;
 import android.view.View;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-
+import androidx.cardview.widget.CardView;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
-public class CategoryPreference extends Preference {
+public class CategoryPreference extends Preference implements View.OnClickListener {
 
     private final View.OnClickListener mClickListener = v -> performClick(v);
 
-    private boolean mAllowDividerAbove;
-    private boolean mAllowDividerBelow;
+    GridLayout gridLayout;
+    CardView cardView;
 
-    public CategoryPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Preference);
-
-        mAllowDividerAbove = TypedArrayUtils.getBoolean(a, R.styleable.Preference_allowDividerAbove,
-                R.styleable.Preference_allowDividerAbove, false);
-        mAllowDividerBelow = TypedArrayUtils.getBoolean(a, R.styleable.Preference_allowDividerBelow,
-                R.styleable.Preference_allowDividerBelow, false);
-        a.recycle();
-
-        setLayoutResource(R.layout.category_preference);
+        View view = inflater.inflate(R.layout.category_preference, container, false);
+        gridLayout = (GridLayout) view.findViewById (R.id.main_grid);
+        cardView = (CardView) view.findViewById(R.id.perfCard);
+        return view;
     }
 
-    public CategoryPreference(Context context, View view) {
-        super(context);
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        holder.itemView.setOnClickListener(mClickListener);
-
-        final boolean selectable = isSelectable();
-        holder.itemView.setFocusable(selectable);
-        holder.itemView.setClickable(selectable);
-        holder.setDividerAllowedAbove(mAllowDividerAbove);
-        holder.setDividerAllowedBelow(mAllowDividerBelow);
-    }
-}
+    cardview.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        v.itemView.setOnClickListener(mClickListener);
+        }
+    });
+ } 
