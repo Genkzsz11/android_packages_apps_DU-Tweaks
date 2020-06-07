@@ -17,7 +17,6 @@ public class ViewUtils {
     public static void updateDrawableColor(Drawable drawable, int color) {
         if (drawable == null) return;
             drawable.setTint(color);
-        else
             drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 

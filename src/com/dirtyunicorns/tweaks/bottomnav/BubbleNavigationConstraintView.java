@@ -44,7 +44,7 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
         init(context, null);
     }
 
-    public BubbleNavigationConstraintView(Context context, @Nullable AttributeSet attrs) {
+    public BubbleNavigationConstraintView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }

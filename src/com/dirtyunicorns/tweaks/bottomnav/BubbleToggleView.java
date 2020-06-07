@@ -30,7 +30,7 @@ import com.dirtyunicorns.tweaks.R;
 public class BubbleToggleView extends RelativeLayout {
 
     private static final String TAG = "Corvus_view";
-    private static final int DEFAULT_ANIM_DURATION = 300;
+    private static final int DEFAULT_ANIM_DURATION = 200;
     private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_LTR;
 
     private BubbleToggleItem bubbleToggleItem;
@@ -360,9 +360,6 @@ public class BubbleToggleView extends RelativeLayout {
                 titleView.setWidth((int) (measuredTitleWidth * value));
                 //end of animation
                 if (value >= 1.0f) {
-                    if (titleView.getVisibility() == GONE) {
-                        titleView.setVisibility(VISIBLE);
-                    }
                 }
             }
         });
