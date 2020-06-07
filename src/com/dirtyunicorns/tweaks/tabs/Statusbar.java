@@ -126,6 +126,7 @@ public class Statusbar extends Fragment implements View.OnClickListener {
                 break;
             case R.id.traffic_indicator:
                 TrafficIndicators traffic = new TrafficIndicators();
+                FragmentTransaction transaction5 = getFragmentManager().beginTransaction();
                 transaction5.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 transaction5.replace(this.getId(), traffic);
                 transaction5.commit();
