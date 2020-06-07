@@ -61,15 +61,31 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
         PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
 
+        Fragment system = new System();
+        Fragment lockscreen = new Lockscreen();
+        Fragment statusbar = new Statusbar();
+        Fragment hardware = new Hardware();
+
+        Fragment fragment = (Fragment) getFragmentManager().findFragmentById(R.id.fragmentContainer);
+        if (fragment == null) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentContainer, system);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
         bubbleNavigationConstraintView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
                 switch(view.getId()) {
                     case R.id.system:
+                    launchFragment(system);
                     case R.id.lockscreen:
+                    launchFragment(lockscreen);
                     case R.id.statusbar:
+                    launchFragment(statusbar);
                     case R.id.hardware:
-                         viewPager.setCurrentItem(position, true);
+                    launchFragment(hardware);	
                     break;
                    }
                }
@@ -90,48 +106,20 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
             }
         });
 
+        viewPager.setCurrentItem(position, true);
         setHasOptionsMenu(true);
         return view;
     }
 
-    class PagerAdapter extends FragmentPagerAdapter {
-
-        String titles[] = getTitles();
-        private Fragment frags[] = new Fragment[titles.length];
-
-        PagerAdapter(FragmentManager fm) {
-            super(fm);
-            frags[0] = new System();
-            frags[1] = new Lockscreen();
-            frags[2] = new Statusbar();
-            frags[3] = new Hardware();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return frags[position];
-        }
-
-        @Override
-        public int getCount() {
-            return frags.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
-        }
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 
-    private String[] getTitles() {
-        String titleString[];
-        titleString = new String[]{
-                getString(R.string.bottom_nav_system_title),
-                getString(R.string.bottom_nav_lockscreen_title),
-                getString(R.string.bottom_nav_statusbar_title),
-                getString(R.string.bottom_nav_hardware_title)};
-
-        return titleString;
+    private void launchFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_frame, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
@@ -146,13 +134,11 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case 0:
+        if (item.getItemId() == 0) {
                 Intent intent = new Intent(mContext, TeamActivity.class);
                 mContext.startActivity(intent);
-                return true;
-            default:
-                return false;
+            return true;
         }
+        return false;
     }
 }
