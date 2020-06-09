@@ -24,10 +24,10 @@
         android:fragment="com.dirtyunicorns.tweaks.fragments.LockscreenItems" />
 
     <com.dirtyunicorns.tweaks.preferences.CategoryPreference
-        android:key="fingerprint_prefs_category"
-        android:icon="@drawable/dt_fingerprint_prefs_bg"
-        android:title="@string/fingerprint_prefs_title"
-        android:summary="@string/fingerprint_prefs_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.FingerprintPrefs" />
+        android:key="fingerprint_options_category"
+        android:icon="@drawable/dt_fingerprint_options_bg"
+        android:title="@string/fingerprint_options_title"
+        android:summary="@string/fingerprint_options_summary"
+        android:fragment="com.dirtyunicorns.tweaks.fragments.FingerprintOptions" />
 
 </PreferenceScreen>

@@ -29,7 +29,7 @@ import com.android.settings.Utils;
 
 public class CategoryPreference extends Preference {
 
-    private final View.OnClickListener mClickListener = v -> performClick(v);
+    private final View.OnClickListener mClickListener = this::performClick;
 
     private boolean mAllowDividerAbove;
     private boolean mAllowDividerBelow;
@@ -46,10 +46,6 @@ public class CategoryPreference extends Preference {
         a.recycle();
 
         setLayoutResource(R.layout.category_preference);
-    }
-
-    public CategoryPreference(Context context, View view) {
-        super(context);
     }
 
     @Override

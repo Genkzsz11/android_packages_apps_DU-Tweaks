@@ -20,7 +20,7 @@
     <bool name="has_lockscreen_items">true</bool>
 
     <!-- Whether to display fingerprint category -->
-    <bool name="has_fingerprint_prefs">true</bool>
+    <bool name="has_fingerprint_options">true</bool>
 
     <!-- Whether to display buttons category -->
     <bool name="has_buttons">true</bool>
@@ -55,11 +55,8 @@
     <!-- Whether to display power menu category -->
     <bool name="has_powermenu">true</bool>
 
-    <!-- Whether to display ticker category -->
-    <bool name="has_ticker">true</bool>
-
     <!-- Whether to display corvus parts -->
-    <bool name="has_corvus_parts_available">false</bool>
+    <bool name="has_corvus_parts_available">true</bool>
 
     <!-- FOD recognizing animation -->
     <bool name="has_fod_animation_picker">false</bool>

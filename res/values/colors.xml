@@ -20,6 +20,7 @@
     <color name="team_dialog_circle_border_color">@*android:color/accent_device_default_light</color>
     <color name="dirty_tweaks_category_icon_tint">@*android:color/accent_device_default_light</color>
     <color name="homepage_du_background">#D32F2F</color>
+    <color name="cardview_bg">#0F000000</color>
 
     <!-- Accent picker -->
     <color name="accent_picker_white_accent">@android:color/white</color>
@@ -37,7 +38,7 @@
     <color name="dt_miscellaneous_color">@color/blue_bg_light</color>
 
     <color name="dt_lockscreen_items_color">@color/green_bg_light</color>
-    <color name="dt_fingerprint_prefs_color">@color/orange_bg_light</color>
+    <color name="dt_fingerprint_options_color">@color/orange_bg_light</color>
 
     <color name="dt_buttons_color">@color/purple_bg_light</color>
     <color name="dt_navigationbar_color">@color/cyan_bg_light</color>
@@ -49,7 +50,6 @@
     <color name="dt_corvus_parts_color">@color/orange_bg_light</color>
     <color name="dt_icon_manager_color">@color/purple_bg_light</color>
     <color name="dt_quicksettings_color">@color/cyan_bg_light</color>
-    <color name="dt_ticker_color">@color/amber_bg_light</color>
     <color name="dt_traffic_color">@color/pink_bg_light</color>
 
     <!--DT Icon foreground tint-->
@@ -57,7 +57,7 @@
     <color name="dt_miscellaneous_icon_tint">@color/blue_active</color>
 
     <color name="dt_lockscreen_items_icon_tint">@color/green_active</color>
-    <color name="dt_fingerprint_prefs_icon_tint">@color/orange_active</color>
+    <color name="dt_fingerprint_options_icon_tint">@color/orange_active</color>
 
     <color name="dt_buttons_icon_tint">@color/purple_active</color>
     <color name="dt_navigationbar_icon_tint">@color/cyan_active</color>
@@ -69,7 +69,6 @@
     <color name="dt_corvus_parts_icon_tint">@color/orange_active</color>
     <color name="dt_icon_manager_icon_tint">@color/purple_active</color>
     <color name="dt_quicksettings_icon_tint">@color/cyan_active</color>
-    <color name="dt_ticker_icon_tint">@color/amber_active</color>
     <color name="dt_traffic_icon_tint">@color/pink_active</color>
 
     <color name="red_bg_light">#3dcf605a</color>

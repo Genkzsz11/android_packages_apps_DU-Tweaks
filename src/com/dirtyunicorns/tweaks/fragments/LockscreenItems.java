@@ -32,8 +32,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settingslib.search.SearchIndexable;
 
-import com.dirtyunicorns.support.preferences.SystemSettingListPreference;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,45 +42,24 @@ public class LockscreenItems extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, Indexable {
 
     private static final String LOCKSCREEN_VISUALIZER_ENABLED = "lockscreen_visualizer_enabled";
-    private static final String FOD_ICON_PICKER_CATEGORY = "fod_icon_picker";
-    private static final String FOD_ANIMATION = "fod_anim";
 
     private SecureSettingMasterSwitchPreference mVisualizerEnabled;
-    private PreferenceCategory mFODIconPickerCategory;
-    private Preference mFODAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.lockscreen_items);
         ContentResolver resolver = getActivity().getContentResolver();
-        Context mContext = getContext();
-        final PreferenceScreen prefScreen = getPreferenceScreen();
 
         mVisualizerEnabled = (SecureSettingMasterSwitchPreference) findPreference(LOCKSCREEN_VISUALIZER_ENABLED);
         mVisualizerEnabled.setOnPreferenceChangeListener(this);
         int visualizerEnabled = Settings.Secure.getInt(resolver,
                 LOCKSCREEN_VISUALIZER_ENABLED, 0);
         mVisualizerEnabled.setChecked(visualizerEnabled != 0);
-
-        mFODIconPickerCategory = (PreferenceCategory) findPreference(FOD_ICON_PICKER_CATEGORY);
-        if (mFODIconPickerCategory != null
-                && !getResources().getBoolean(com.android.internal.R.bool.config_needCustomFODView)) {
-            prefScreen.removePreference(mFODIconPickerCategory);
-        }
-
-        boolean showFODAnimationPicker = mContext.getResources().getBoolean(R.bool.has_fod_animation_picker);
-        mFODAnimation = (Preference) findPreference(FOD_ANIMATION);
-        if ((mFODIconPickerCategory != null && mFODAnimation != null &&
-             !getResources().getBoolean(com.android.internal.R.bool.config_needCustomFODView)) ||
-                (mFODIconPickerCategory != null && mFODAnimation != null && !showFODAnimationPicker)) {
-            mFODIconPickerCategory.removePreference(mFODAnimation);
-        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mVisualizerEnabled) {
             boolean value = (Boolean) newValue;
             Settings.Secure.putInt(getContentResolver(),

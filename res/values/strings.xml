@@ -45,8 +45,8 @@
     <string name="notifications_summary">Customize the notifications</string>
 
     <!-- Lockscreen -->
-    <string name="fingerprint_prefs_title">Fingerprint prefs</string>
-    <string name="fingerprint_prefs_summary">Customize the fingerprint scanner</string>
+    <string name="fingerprint_options_title">Fingerprint options</string>
+    <string name="fingerprint_options_summary">Customize the fingerprint scanner</string>
     <string name="lockscreen_items_title">Lockscreen items</string>
     <string name="lockscreen_items_summary">Customize the lockscreen item</string>
     <string name="lockscreen_style_title">Lockscreen Style</string>
@@ -66,8 +66,6 @@
     <string name="quicksettings_summary">Customize the quick settings</string>
     <string name="traffic_title">Traffic indicators</string>
     <string name="traffic_summary">Customize the traffic indicators</string>
-    <string name="ticker_title">Ticker</string>
-    <string name="ticker_summary">Customize the statusbar ticker</string>
 
     <!-- Navigation -->
     <string name="buttons_title">Buttons</string>
@@ -797,6 +795,7 @@
     <string name="lockscreen_date_selection_str_border_gradient">Dark with gradient borders</string>
 
     <!-- Statusbar ticker -->
+    <string name="notification_ticker_title">Ticker</string>
     <string name="status_bar_ticker_title">Notifications Ticker</string>
     <string name="status_bar_show_ticker_title">Ticker</string>
     <string name="status_bar_show_ticker_summary">Notification preview in status bar</string>
@@ -1106,4 +1105,5 @@
     <string name="volume_steps_system_title">Volume steps: System</string>
     <string name="volume_steps_voice_call_title">Volume steps: Voice Call</string>
     <string name="volume_steps_reset">Reset</string>
+
 </resources>

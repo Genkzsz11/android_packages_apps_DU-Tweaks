@@ -3,15 +3,11 @@ package com.dirtyunicorns.tweaks.bottomnav;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
@@ -33,8 +29,8 @@ import com.dirtyunicorns.tweaks.R;
  */
 public class BubbleToggleView extends RelativeLayout {
 
-    private static final String TAG = "BNI_View";
-    private static final int DEFAULT_ANIM_DURATION = 300;
+    private static final String TAG = "Corvus_view";
+    private static final int DEFAULT_ANIM_DURATION = 200;
     private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_LTR;
 
     private BubbleToggleItem bubbleToggleItem;
@@ -58,12 +54,12 @@ public class BubbleToggleView extends RelativeLayout {
         init(context, null);
     }
 
-    public BubbleToggleView(Context context, @Nullable AttributeSet attrs) {
+    public BubbleToggleView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public BubbleToggleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BubbleToggleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -154,15 +150,10 @@ public class BubbleToggleView extends RelativeLayout {
         };
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public BubbleToggleView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
-
-    /////////////////////////////////////
-    // PRIVATE METHODS
-    /////////////////////////////////////
 
     /**
      * Initialize
@@ -170,7 +161,7 @@ public class BubbleToggleView extends RelativeLayout {
      * @param context current context
      * @param attrs   custom attributes
      */
-    private void init(Context context, @Nullable AttributeSet attrs) {
+    private void init(Context context, AttributeSet attrs) {
         //initialize default component
         String title = "Title";
         Drawable icon = null;
@@ -308,10 +299,6 @@ public class BubbleToggleView extends RelativeLayout {
         setInitialState(isActive);
     }
 
-    /////////////////////////////////
-    // PUBLIC METHODS
-    ////////////////////////////////
-
     /**
      * Updates the Initial State
      *
@@ -373,7 +360,6 @@ public class BubbleToggleView extends RelativeLayout {
                 titleView.setWidth((int) (measuredTitleWidth * value));
                 //end of animation
                 if (value >= 1.0f) {
-                    //do something
                 }
             }
         });
@@ -425,15 +411,6 @@ public class BubbleToggleView extends RelativeLayout {
      */
     public boolean isActive() {
         return isActive;
-    }
-
-    /**
-     * Sets the {@link Typeface} of the {@link #titleView}
-     *
-     * @param typeface to be used
-     */
-    public void setTitleTypeface(Typeface typeface) {
-        titleView.setTypeface(typeface);
     }
 
     /**

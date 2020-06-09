@@ -60,7 +60,6 @@ public class BatteryOptions extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.battery_options);
-        PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
 
         mBatteryLightEnabled = (SystemSettingMasterSwitchPreference) findPreference(BATTERY_LIGHT_ENABLED);
@@ -95,7 +94,7 @@ public class BatteryOptions extends SettingsPreferenceFragment
             return true;
         } else if (preference == mBatteryStyle) {
             int batterystyle = Integer.parseInt((String) newValue);
-            Settings.System.putIntForUser(getActivity().getContentResolver(),
+            Settings.System.putIntForUser(resolver,
                 Settings.System.STATUS_BAR_BATTERY_STYLE, batterystyle,
                 UserHandle.USER_CURRENT);
             int index = mBatteryStyle.findIndexOfValue((String) newValue);
@@ -104,7 +103,7 @@ public class BatteryOptions extends SettingsPreferenceFragment
             return true;
         } else if (preference == mBatteryPercent) {
             int batteryPercent = Integer.parseInt((String) newValue);
-            Settings.System.putIntForUser(getActivity().getContentResolver(),
+            Settings.System.putIntForUser(resolver,
                     Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, batteryPercent,
                     UserHandle.USER_CURRENT);
             int index = mBatteryPercent.findIndexOfValue((String) newValue);

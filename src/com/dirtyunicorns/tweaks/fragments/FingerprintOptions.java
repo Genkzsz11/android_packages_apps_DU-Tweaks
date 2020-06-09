@@ -16,16 +16,13 @@
 
 package com.dirtyunicorns.tweaks.fragments;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.*;
 
 import com.android.internal.logging.nano.MetricsProto;
 
@@ -40,13 +37,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class Ticker extends SettingsPreferenceFragment
+public class FingerprintOptions extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, Indexable {
+
+    private static final String FOD_ICON_PICKER_CATEGORY = "fod_icon_picker";
+    private static final String FOD_ANIMATION = "fod_anim";
+
+    private PreferenceCategory mFODIconPickerCategory;
+    private Preference mFODAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.ticker);
+        addPreferencesFromResource(R.xml.fingerprint_options);
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        Context mContext = getContext();
+
+        mFODIconPickerCategory = (PreferenceCategory) findPreference(FOD_ICON_PICKER_CATEGORY);
+        if (mFODIconPickerCategory != null
+                && !getResources().getBoolean(com.android.internal.R.bool.config_needCustomFODView)) {
+            prefScreen.removePreference(mFODIconPickerCategory);
+        }
+
+        boolean showFODAnimationPicker = mContext.getResources().getBoolean(R.bool.has_fod_animation_picker);
+        mFODAnimation = (Preference) findPreference(FOD_ANIMATION);
+        if ((mFODIconPickerCategory != null && mFODAnimation != null &&
+             !getResources().getBoolean(com.android.internal.R.bool.config_needCustomFODView)) ||
+                (mFODIconPickerCategory != null && mFODAnimation != null && !showFODAnimationPicker)) {
+            mFODIconPickerCategory.removePreference(mFODAnimation);
+        }
     }
 
     @Override
@@ -68,7 +87,7 @@ public class Ticker extends SettingsPreferenceFragment
                             new ArrayList<SearchIndexableResource>();
 
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.ticker;
+                    sir.xmlResId = R.xml.fingerprint_options;
                     result.add(sir);
                     return result;
                 }
@@ -77,6 +96,6 @@ public class Ticker extends SettingsPreferenceFragment
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     return keys;
-                }
+        }
     };
 }

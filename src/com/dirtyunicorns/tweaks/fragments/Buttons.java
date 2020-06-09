@@ -68,7 +68,6 @@ public class Buttons extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.buttons);
-        ContentResolver resolver = getActivity().getContentResolver();
         PreferenceScreen prefScreen = getPreferenceScreen();
 
         // volume key cursor control
@@ -99,7 +98,7 @@ public class Buttons extends SettingsPreferenceFragment
         if (preference == mVolumeKeyCursorControl) {
             String volumeKeyCursorControl = (String) newValue;
             int volumeKeyCursorControlValue = Integer.parseInt(volumeKeyCursorControl);
-            Settings.System.putInt(getActivity().getContentResolver(),
+            Settings.System.putInt(resolver,
                     Settings.System.VOLUME_KEY_CURSOR_CONTROL, volumeKeyCursorControlValue);
             int volumeKeyCursorControlIndex = mVolumeKeyCursorControl
                     .findIndexOfValue(volumeKeyCursorControl);

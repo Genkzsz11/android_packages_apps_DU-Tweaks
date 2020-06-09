@@ -60,8 +60,6 @@ public class Miscellaneous extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.miscellaneous);
 
-        PreferenceScreen prefScreen = getPreferenceScreen();
-
         mGamingMode = (SystemSettingMasterSwitchPreference) findPreference(GAMING_MODE_ENABLED);
         mGamingMode.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.GAMING_MODE_ENABLED, 0) == 1));

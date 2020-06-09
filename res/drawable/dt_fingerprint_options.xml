@@ -4,7 +4,7 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24"
-    android:tint="@color/dt_fingerprint_prefs_icon_tint">
+    android:tint="@color/dt_fingerprint_options_icon_tint">
 
     <path
         android:fillColor="#000"

@@ -146,13 +146,11 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case 0:
+        if (item.getItemId() == 0) {
                 Intent intent = new Intent(mContext, TeamActivity.class);
                 mContext.startActivity(intent);
-                return true;
-            default:
-                return false;
+            return true;
         }
+        return false;
     }
 }

@@ -17,11 +17,9 @@
 package com.dirtyunicorns.tweaks.tabs;
 
 import android.os.Bundle;
-import android.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceFragment;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -32,7 +30,7 @@ import com.android.internal.util.du.Utils;
 public class Lockscreen extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    private static final String FINGERPRINT_PREFS_CATEGORY = "fingerprint_prefs_category";
+    private static final String FINGERPRINT_OPTIONS_CATEGORY = "fingerprint_options_category";
     private static final String LOCKSCREEN_ITEMS_CATEGORY = "lockscreen_items_category";
 
     @Override
@@ -45,14 +43,18 @@ public class Lockscreen extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(LockscreenItems);
         }
 
-        Preference FingerprintPrefs = findPreference(FINGERPRINT_PREFS_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_fingerprint_prefs)) {
-            getPreferenceScreen().removePreference(FingerprintPrefs);
+        Preference FingerprintOptions = findPreference(FINGERPRINT_OPTIONS_CATEGORY);
+        if (!getResources().getBoolean(R.bool.has_fingerprint_options)) {
+            getPreferenceScreen().removePreference(FingerprintOptions);
         } else {
             if (!Utils.hasFingerprintSupport(getContext())) {
-                getPreferenceScreen().removePreference(FingerprintPrefs);
+                getPreferenceScreen().removePreference(FingerprintOptions);
             }
         }
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 
     @Override
@@ -66,14 +68,13 @@ public class Lockscreen extends SettingsPreferenceFragment
     }
 
 
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        return false;
-    }
-
-
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DIRTYTWEAKS;
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
+        return false;
     }
 }
