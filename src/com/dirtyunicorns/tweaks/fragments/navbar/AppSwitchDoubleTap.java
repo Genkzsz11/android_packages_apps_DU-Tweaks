@@ -1,4 +1,4 @@
-package com.dirtyunicorns.tweaks.fragments.navbar;
+package com.dirtyunicorns.tweaks.fragments.hardware.navbar;
 
 import android.content.pm.ActivityInfo;
 import android.provider.Settings;

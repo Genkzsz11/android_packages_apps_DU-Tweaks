@@ -2,26 +2,24 @@ package com.dirtyunicorns.tweaks.bottomnav;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
+
 import com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationChangeListener;
 import com.dirtyunicorns.tweaks.R;
-import java.util.ArrayList;
 
 /**
  * BubbleNavigationConstraintView
  *
  */
 
-@SuppressWarnings("unused")
 public class BubbleNavigationConstraintView extends ConstraintLayout implements View.OnClickListener, IBubbleNavigation {
 
     enum DisplayMode {
@@ -49,17 +47,17 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
     /**
      * Constructors
      */
-    public BubbleNavigationConstraintView(@NonNull Context context) {
+    public BubbleNavigationConstraintView(Context context) {
         super(context);
         init(context, null);
     }
 
-    public BubbleNavigationConstraintView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public BubbleNavigationConstraintView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public BubbleNavigationConstraintView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BubbleNavigationConstraintView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -269,21 +267,6 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
     @Override
     public void setNavigationChangeListener(BubbleNavigationChangeListener navigationChangeListener) {
         this.navigationChangeListener = navigationChangeListener;
-    }
-
-    /**
-     * Set the {@link Typeface} for the Text Elements of the View
-     *
-     * @param typeface to be used
-     */
-    @Override
-    public void setTypeface(Typeface typeface) {
-        if (bubbleNavItems != null) {
-            for (BubbleToggleView btv : bubbleNavItems)
-                btv.setTitleTypeface(typeface);
-        } else {
-            currentTypeface = typeface;
-        }
     }
 
     /**

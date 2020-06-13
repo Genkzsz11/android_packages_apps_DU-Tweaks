@@ -17,11 +17,9 @@
 package com.dirtyunicorns.tweaks.tabs;
 
 import android.os.Bundle;
-import android.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceFragment;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -35,8 +33,6 @@ public class Statusbar extends SettingsPreferenceFragment
     private static final String CLOCK_CATEGORY = "clock_options_category";
     private static final String ICON_MANAGER_CATEGORY = "icon_manager_title";
     private static final String QUICK_SETTINGS_CATEGORY = "quick_settings_category";
-    private static final String TRAFFIC_CATEGORY = "traffic_category";
-    private static final String TICKER_CATEGORY = "ticker_category";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,11 +68,10 @@ public class Statusbar extends SettingsPreferenceFragment
         if (!getResources().getBoolean(R.bool.has_traffic)) {
             getPreferenceScreen().removePreference(Traffic);
         }
+    }
 
-        Preference Ticker = findPreference(TICKER_CATEGORY);
-        if (!getResources().getBoolean(R.bool.has_ticker)) {
-            getPreferenceScreen().removePreference(Ticker);
-        }
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 
     @Override
@@ -89,15 +84,14 @@ public class Statusbar extends SettingsPreferenceFragment
         super.onPause();
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIRTYTWEAKS;
+    }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
         return false;
     }
 
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DIRTYTWEAKS;
-    }
 }

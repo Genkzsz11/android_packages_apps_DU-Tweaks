@@ -57,11 +57,4 @@
         android:title="@string/traffic_title"
         android:summary="@string/traffic_summary"
         android:fragment="com.dirtyunicorns.tweaks.fragments.TrafficIndicators" />
-
-    <com.dirtyunicorns.tweaks.preferences.CategoryPreference
-        android:key="ticker_category"
-        android:icon="@drawable/dt_ticker_bg"
-        android:title="@string/ticker_title"
-        android:summary="@string/ticker_summary"
-        android:fragment="com.dirtyunicorns.tweaks.fragments.Ticker" />
 </PreferenceScreen>

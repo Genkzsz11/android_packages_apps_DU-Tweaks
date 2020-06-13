@@ -45,8 +45,8 @@ import com.dirtyunicorns.tweaks.bottomnav.BubbleNavigationChangeListener;
 
 public class DirtyTweaks extends SettingsPreferenceFragment {
 
-    private MenuItem mMenuItem;
-    private Context mContext;
+    Context mContext;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,10 +54,13 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
         mContext = getActivity();
         View view = inflater.inflate(R.layout.dirtytweaks, container, false);
 
-        getActivity().setTitle(R.string.dirtytweaks_title);
+        ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.dirtytweaks_title);
+        }
 
-        final BubbleNavigationConstraintView bubbleNavigationConstraintView =  (BubbleNavigationConstraintView) view.findViewById(R.id.bottom_navigation_view_constraint);
-        final ViewPager viewPager = view.findViewById(R.id.viewpager);
+        BubbleNavigationConstraintView bubbleNavigationConstraintView =  (BubbleNavigationConstraintView) view.findViewById(R.id.bottom_navigation_view_constraint);
+        ViewPager viewPager = view.findViewById(R.id.viewpager);
         PagerAdapter mPagerAdapter = new PagerAdapter(getFragmentManager());
         viewPager.setAdapter(mPagerAdapter);
 
@@ -66,12 +69,19 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
             public void onNavigationChanged(View view, int position) {
                 switch(view.getId()) {
                     case R.id.system:
+                       viewPager.setCurrentItem(0);
+                       return true;
                     case R.id.lockscreen:
+                       viewPager.setCurrentItem(1);
+                       return true;
                     case R.id.statusbar:
+                       viewPager.setCurrentItem(2);
+                       return true;
                     case R.id.hardware:
-                         viewPager.setCurrentItem(position, true);
-                    break;
+                       viewPager.setCurrentItem(3);
+                       return true;
                    }
+                   return false;
                }
            });
 
@@ -130,7 +140,6 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
                 getString(R.string.bottom_nav_lockscreen_title),
                 getString(R.string.bottom_nav_statusbar_title),
                 getString(R.string.bottom_nav_hardware_title)};
-
         return titleString;
     }
 
@@ -146,13 +155,11 @@ public class DirtyTweaks extends SettingsPreferenceFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case 0:
-                Intent intent = new Intent(mContext, TeamActivity.class);
-                mContext.startActivity(intent);
-                return true;
-            default:
-                return false;
+        if (item.getItemId() == 0) {
+            Intent intent = new Intent(mContext, TeamActivity.class);
+            mContext.startActivity(intent);
+            return true;
         }
+        return false;
     }
 }
