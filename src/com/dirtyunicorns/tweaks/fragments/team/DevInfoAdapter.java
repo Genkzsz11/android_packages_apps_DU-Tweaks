@@ -20,6 +20,7 @@ public class DevInfoAdapter {
 
     private int image;
     private String devName;
+    private String deviceName;
     private String devTitle;
     private String githubName;
     private String telegramName;
@@ -38,6 +39,14 @@ public class DevInfoAdapter {
 
     public String getDevName() {
         return devName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
     }
 
     public void setDevTitle(String devTitle) {

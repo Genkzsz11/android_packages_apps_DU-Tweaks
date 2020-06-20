@@ -56,6 +56,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         ((ViewHolder) viewHolder).mDevImage.setImageResource(itemAdapter.getImage());
         ((ViewHolder) viewHolder).mDevName.setText(itemAdapter.getDevName());
+        ((ViewHolder) viewHolder).mDeviceName.setText(itemAdapter.getDeviceName());
         ((ViewHolder) viewHolder).mDevTitle.setText(itemAdapter.getDevTitle());
         ((ViewHolder) viewHolder).mGithubName.setText(itemAdapter.getGithubName());
         ((ViewHolder) viewHolder).mTelegramName.setText(itemAdapter.getTelegramName());
@@ -72,6 +73,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ImageView mGithub;
         public ImageView mTelegram;
         public TextView mDevName;
+        public TextView mDeviceName;
         public TextView mDevTitle;
         public TextView mGithubName;
         public TextView mTelegramName;
@@ -83,6 +85,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             mDevImage = itemView.findViewById(R.id.devImage);
             mDevName = itemView.findViewById(R.id.devName);
+            mDeviceName = itemView.findViewById(R.id.deviceName);
             mDevTitle = itemView.findViewById(R.id.devTitle);
             mGithub = itemView.findViewById(R.id.devGithub);
             mGithubName = itemView.findViewById(R.id.githubName);
