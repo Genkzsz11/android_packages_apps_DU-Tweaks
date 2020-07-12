@@ -119,11 +119,6 @@
             android:entryValues="@array/ringtone_focus_mode_values"
             android:defaultValue="1" />
 
-        <com.dirtyunicorns.tweaks.preferences.RecentsIconPackPreference
-            android:key="recents_icon_pack"
-            android:title="@string/recents_icon_pack_title"
-            android:summary="@string/recents_icon_pack_summary" />
-
     </PreferenceCategory>
 
     <!-- Wakelock blocker -->

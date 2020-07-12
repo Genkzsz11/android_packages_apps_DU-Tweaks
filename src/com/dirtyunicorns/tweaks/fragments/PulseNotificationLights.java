@@ -49,7 +49,6 @@ public class PulseNotificationLights extends SettingsPreferenceFragment
     private static final String AMBIENT_LIGHT_CUSTOM_COLOR = "ambient_light_custom_color";
     private static final String AMBIENT_LIGHT_DURATION = "ambient_light_duration";
     private static final String AMBIENT_LIGHT_REPEAT_COUNT = "ambient_light_repeat_count";
-    private static final String AMBIENT_LIGHT_BLEND_COLOR = "ambient_light_blend_color";
 
     private ListPreference mEdgeLightColorMode;
     private CustomSeekBarPreference mEdgeLightDurationPreference;
@@ -67,11 +66,6 @@ public class PulseNotificationLights extends SettingsPreferenceFragment
         mEdgeLightColorMode.setValue(String.valueOf(edgeLightColorMode));
         mEdgeLightColorMode.setSummary(mEdgeLightColorMode.getEntry());
         mEdgeLightColorMode.setOnPreferenceChangeListener(this);
-
-        mEdgeLightColorPreference = (ColorPickerPreference) findPreference(AMBIENT_LIGHT_CUSTOM_COLOR);
-        int edgeLightColor = Settings.System.getInt(getContentResolver(),
-                Settings.System.AMBIENT_LIGHT_CUSTOM_COLOR, 0xFF3980FF);
-        mEdgeLightColorPreference.setNewPreviewColor(edgeLightColor);
 
         mEdgeLightColorPreference = (ColorPickerPreference) findPreference(AMBIENT_LIGHT_CUSTOM_COLOR);
         int edgeLightColor = Settings.System.getInt(getContentResolver(),

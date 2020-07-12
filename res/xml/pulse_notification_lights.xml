@@ -16,7 +16,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:title="@string/pulse_ambient_light_title" >
 
         <!-- Preview -->
@@ -42,18 +41,6 @@
             android:key="ambient_light_custom_color"
             android:title="@string/pulse_ambient_light_color_title"
             android:defaultValue="0xFF3980FF" />
-
-        <com.aicp.gear.preference.SystemSettingColorBlendPreference
-            android:title="@string/battery_bar_color_title"
-            android:summary="@string/battery_bar_color_summary"
-            app:keyColorStart="statusbar_battery_bar_battery_low_color"
-            app:keyColorEnd="statusbar_battery_bar_color"
-            app:keyBlendReverse="statusbar_battery_bar_blend_color_reverse"
-            app:defaultValueColorStart="#ffffffff"
-            app:defaultValueColorEnd="#ffffffff"
-            app:previewStartText="@string/battery_blend_start"
-            app:previewBetweenText="@string/battery_blend_between"
-            app:previewEndText="@string/battery_blend_end" />
 
         <com.dirtyunicorns.support.preferences.CustomSeekBarPreference
             android:key="ambient_light_duration"

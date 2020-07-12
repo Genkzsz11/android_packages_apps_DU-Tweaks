@@ -37,7 +37,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.dirtyunicorns.support.preferences.SystemSettingMasterSwitchPreference;
-import com.dirtyunicorns.support.preferences.IconPackPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,14 +120,6 @@ public class Miscellaneous extends SettingsPreferenceFragment
     private static boolean hasPhysicalDisplayCutout(Context context) {
         return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_physicalDisplayCutout);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        IconPackPreference iconPackPref = (IconPackPreference) findPreference("recents_icon_pack");
-        // Re-initialise preference
-        iconPackPref.init();
     }
 
     @Override
