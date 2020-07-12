@@ -121,6 +121,20 @@
             android:summary="%s"
             android:defaultValue="0" />
 
+        <com.dirtyunicorns.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_panel_disco"
+            android:title="@string/qs_panel_disco_title"
+            android:summary="@sting/qs_panel_disco_summary"
+            android:defaultValue="false" />
+
+        <com.dirtyunicorns.support.preferences.CustomSeekBarPreference
+            android:key="qs_panel_disco_duration"
+            android:title="@string/qs_panel_disco_duration_title"
+            android:defaultValue="5"
+            android:max="5"
+            settings:min="1"
+            settings:units="sec" />
+
         <com.dirtyunicorns.support.preferences.SystemSettingMasterSwitchPreference
             android:key="status_bar_custom_header"
             android:fragment="com.dirtyunicorns.tweaks.fragments.QsHeader"
